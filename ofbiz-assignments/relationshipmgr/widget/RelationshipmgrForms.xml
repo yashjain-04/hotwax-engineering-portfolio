@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://ofbiz.apache.org/Widget-Form" xsi:schemaLocation="http://ofbiz.apache.org/Widget-Form http://ofbiz.apache.org/dtds/widget-form.xsd">
+
+    <!-- PERSON FORMS -->
+    <form name="CreatePerson" type="single" target="createRmPerson">
+        <!-- Hidden status defaults to enabled -->
+        <field name="statusId"><hidden value="PARTY_ENABLED"/></field>
+        <field name="firstName" title="First Name" required-field="true"><text/></field>
+        <field name="lastName" title="Last Name" required-field="true"><text/></field>
+        <field name="gender" title="Gender">
+            <drop-down allow-empty="true">
+                <option key="M" description="Male"/>
+                <option key="F" description="Female"/>
+            </drop-down>
+        </field>
+        <field name="birthDate" title="Birth Date"><date-time type="date"/></field>
+        <field name="description" title="Internal Note (Optional)"><text size="40"/></field>
+        <field name="submitButton" title="Create Person" widget-style="buttontext"><submit button-type="button"/></field>
+    </form>
+
+    <form name="ListPersons" type="list" list-name="personList" odd-row-style="alternate-row" default-table-style="basic-table hover-bar">
+        <actions><entity-condition entity-name="RmPerson"><order-by field-name="partyId"/></entity-condition></actions>
+        <field name="partyId" title="Party ID"><display/></field>
+        <field name="firstName" title="First Name"><display/></field>
+        <field name="lastName" title="Last Name"><display/></field>
+    </form>
+
+    <!-- PARTY GROUP FORMS  -->
+    <form name="CreatePartyGroup" type="single" target="createRmPartyGroup">
+        <field name="statusId"><hidden value="PARTY_ENABLED"/></field>
+        <field name="groupName" title="Organization / Group Name" required-field="true"><text size="40"/></field>
+        <field name="comments" title="Comments"><text size="40"/></field>
+        <field name="description" title="Internal Note (Optional)"><text size="40"/></field>
+        <field name="submitButton" title="Create Organization" widget-style="buttontext"><submit button-type="button"/></field>
+    </form>
+
+    <form name="ListPartyGroups" type="list" list-name="groupList" odd-row-style="alternate-row" default-table-style="basic-table hover-bar">
+        <actions><entity-condition entity-name="RmPartyGroup"><order-by field-name="partyId"/></entity-condition></actions>
+        <field name="partyId" title="Party ID"><display/></field>
+        <field name="groupName" title="Group Name"><display/></field>
+        <field name="comments" title="Comments"><display/></field>
+    </form>
+
+    <form name="AddRmTelecomNumber" type="single" target="createRmTelecomNumber">
+        <field name="partyId" title="Select Party to Link" required-field="true">
+            <drop-down allow-empty="false">
+                <entity-options entity-name="RmParty" description="${partyId} - ${description}" key-field-name="partyId"/>
+            </drop-down>
+        </field>
+        <field name="roleTypeId" title="Role Context" required-field="true">
+            <drop-down allow-empty="false">
+                <entity-options entity-name="RmRoleType" description="${description}" key-field-name="roleTypeId"/>
+            </drop-down>
+        </field>
+        <field name="contactMechPurposeId" title="Purpose" required-field="true">
+            <drop-down allow-empty="false">
+                <entity-options entity-name="RmContactMechPurpose" description="${description}" key-field-name="contactMechPurposeId"/>
+            </drop-down>
+        </field>
+        <field name="countryCode" title="Country Code"><text size="5"/></field>
+        <field name="areaCode" title="Area Code"><text size="5"/></field>
+        <field name="contactNumber" title="Phone Number" required-field="true"><text/></field>
+        <field name="submitButton" title="Save &amp; Link Telecom" widget-style="buttontext"><submit button-type="button"/></field>
+    </form>
+
+    <form name="AddRmPostalAddress" type="single" target="createRmPostalAddress">
+        <field name="partyId" title="Select Party to Link" required-field="true">
+            <drop-down allow-empty="false">
+                <entity-options entity-name="RmParty" description="${partyId} - ${description}" key-field-name="partyId"/>
+            </drop-down>
+        </field>
+        <field name="roleTypeId" title="Role Context" required-field="true">
+            <drop-down allow-empty="false">
+                <entity-options entity-name="RmRoleType" description="${description}" key-field-name="roleTypeId"/>
+            </drop-down>
+        </field>
+        <field name="contactMechPurposeId" title="Purpose" required-field="true">
+            <drop-down allow-empty="false">
+                <entity-options entity-name="RmContactMechPurpose" description="${description}" key-field-name="contactMechPurposeId"/>
+            </drop-down>
+        </field>
+        <field name="toName" title="To Name"><text/></field>
+        <field name="address1" title="Address Line 1" required-field="true"><text/></field>
+        <field name="city" title="City" required-field="true"><text/></field>
+        <field name="postalCode" title="Postal Code"><text/></field>
+        <field name="submitButton" title="Save &amp; Link Address" widget-style="buttontext"><submit button-type="button"/></field>
+    </form>
+
+    <form name="ListPartyContactMechs" type="list" list-name="pcmList" odd-row-style="alternate-row" default-table-style="basic-table hover-bar">
+        <actions><entity-condition entity-name="RmPartyContactMech"><order-by field-name="partyId"/></entity-condition></actions>
+        <field name="partyId" title="Party ID"><display/></field>
+        <field name="contactMechId" title="Contact ID"><display/></field>
+        <field name="contactMechPurposeId" title="Purpose"><display-entity entity-name="RmContactMechPurpose" description="${description}"/></field>
+        <field name="roleTypeId" title="Role Context"><display-entity entity-name="RmRoleType" description="${description}"/></field>
+        <field name="fromDate" title="Linked Since"><display type="date"/></field>
+    </form>
+
+    <!-- Form to List Parties -->
+    <form name="ListParties" type="list" list-name="partyList"
+          odd-row-style="alternate-row" default-table-style="basic-table hover-bar">
+        <actions>
+            <entity-condition entity-name="RmParty">
+                <order-by field-name="partyId"/>
+            </entity-condition>
+        </actions>
+        <field name="partyId" title="Party ID"><display/></field>
+        <field name="partyTypeId" title="Party Type"><display/></field>
+        <field name="statusId" title="Status"><display/></field>
+        <field name="createdDate" title="Created Date"><display type="date-time"/></field>
+    </form>
+
+    <form name="AddRmEmailAddress" type="single" target="createRmEmailAddress">
+        <field name="partyId" title="Select Party to Link" required-field="true">
+            <drop-down allow-empty="false">
+                <entity-options entity-name="RmParty" description="${partyId} - ${description}" key-field-name="partyId"/>
+            </drop-down>
+        </field>
+        <field name="roleTypeId" title="Role Context" required-field="true">
+            <drop-down allow-empty="false">
+                <entity-options entity-name="RmRoleType" description="${description}" key-field-name="roleTypeId"/>
+            </drop-down>
+        </field>
+        <field name="contactMechPurposeId" title="Purpose" required-field="true">
+            <drop-down allow-empty="false">
+                <entity-options entity-name="RmContactMechPurpose" description="${description}" key-field-name="contactMechPurposeId"/>
+            </drop-down>
+        </field>
+        <field name="infoString" title="Email Address" required-field="true"><text size="40"/></field>
+        <field name="submitButton" title="Save &amp; Link Email" widget-style="buttontext"><submit button-type="button"/></field>
+    </form>
+
+    <!-- Form to List Contact Mechanisms -->
+    <form name="ListContactMechs" type="list" list-name="contactMechList"
+          odd-row-style="alternate-row" default-table-style="basic-table hover-bar">
+        <actions>
+            <entity-condition entity-name="RmContactMech">
+                <order-by field-name="contactMechId"/>
+            </entity-condition>
+        </actions>
+        <field name="contactMechId" title="Contact Mech ID"><display/></field>
+        <field name="contactMechTypeId" title="Contact Mech Type"><display/></field>
+        <field name="infoString" title="Info String"><display/></field>
+    </form>
+</forms>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://ofbiz.apache.org/dtds/services.xsd">
+    <description>Relationshipmgr Services</description>
+    <vendor></vendor>
+    <version>1.0</version>
+
+    <service name="noSyntaxError" engine="interface">
+        <description>
+            Dummy service to prevent empty files and syntax error - Remove when the 1st real service will be added here 
+        </description>
+    </service>
+
+    <!-- Groovy Service: Create Person (combines Party and Person) -->
+    <service name="createRmPerson" engine="groovy"
+             location="component://relationshipmgr/groovyScripts/RelationshipmgrServices.groovy"
+             invoke="createRmPerson" auth="true">
+        <description>Create a Party and Person simultaneously</description>
+        <attribute name="partyId" type="String" mode="OUT" optional="false"/>
+        <!-- Supertype Fields -->
+        <attribute name="statusId" type="String" mode="IN" optional="true"/>
+        <attribute name="description" type="String" mode="IN" optional="true"/>
+        <!-- Subtype Fields -->
+        <attribute name="firstName" type="String" mode="IN" optional="false"/>
+        <attribute name="lastName" type="String" mode="IN" optional="false"/>
+        <attribute name="gender" type="String" mode="IN" optional="true"/>
+        <attribute name="birthDate" type="java.sql.Date" mode="IN" optional="true"/>
+    </service>
+
+    <!-- Groovy Service: Create PartyGroup (combines Party and PartyGroup) -->
+    <service name="createRmPartyGroup" engine="groovy"
+             location="component://relationshipmgr/groovyScripts/RelationshipmgrServices.groovy"
+             invoke="createRmPartyGroup" auth="true">
+        <description>Create a Party and PartyGroup simultaneously</description>
+        <attribute name="partyId" type="String" mode="OUT" optional="false"/>
+        <!-- Supertype Fields -->
+        <attribute name="statusId" type="String" mode="IN" optional="true"/>
+        <attribute name="description" type="String" mode="IN" optional="true"/>
+        <!-- Subtype Fields -->
+        <attribute name="groupName" type="String" mode="IN" optional="false"/>
+        <attribute name="comments" type="String" mode="IN" optional="true"/>
+    </service>
+
+    <service name="createRmContactMech" default-entity-name="RmContactMech" engine="entity-auto" invoke="create" auth="true">
+        <auto-attributes include="pk" mode="INOUT" optional="true"/>
+        <auto-attributes include="nonpk" mode="IN" optional="true"/>
+    </service>
+
+    <service name="createRmTelecomNumber" engine="groovy"
+             location="component://relationshipmgr/groovyScripts/RelationshipmgrServices.groovy"
+             invoke="createRmTelecomNumber" auth="true">
+        <description>Create Base Contact, Telecom Subtype, and Link to Party</description>
+        <attribute name="partyId" type="String" mode="IN" optional="false"/>
+        <attribute name="contactMechPurposeId" type="String" mode="IN" optional="false"/>
+        <attribute name="roleTypeId" type="String" mode="IN" optional="false"/>
+        <attribute name="countryCode" type="String" mode="IN" optional="true"/>
+        <attribute name="areaCode" type="String" mode="IN" optional="true"/>
+        <attribute name="contactNumber" type="String" mode="IN" optional="false"/>
+    </service>
+
+    <service name="createRmPostalAddress" engine="groovy"
+             location="component://relationshipmgr/groovyScripts/RelationshipmgrServices.groovy"
+             invoke="createRmPostalAddress" auth="true">
+        <description>Create Base Contact, Postal Subtype, and Link to Party</description>
+        <attribute name="partyId" type="String" mode="IN" optional="false"/>
+        <attribute name="contactMechPurposeId" type="String" mode="IN" optional="false"/>
+        <attribute name="roleTypeId" type="String" mode="IN" optional="false"/>
+        <attribute name="toName" type="String" mode="IN" optional="true"/>
+        <attribute name="address1" type="String" mode="IN" optional="false"/>
+        <attribute name="city" type="String" mode="IN" optional="false"/>
+        <attribute name="postalCode" type="String" mode="IN" optional="true"/>
+    </service>
+
+    <service name="createRmEmailAddress" engine="groovy"
+             location="component://relationshipmgr/groovyScripts/RelationshipmgrServices.groovy"
+             invoke="createRmEmailAddress" auth="true">
+        <description>Create Email Address and Link to Party</description>
+        <attribute name="partyId" type="String" mode="IN" optional="false"/>
+        <attribute name="contactMechPurposeId" type="String" mode="IN" optional="false"/>
+        <attribute name="roleTypeId" type="String" mode="IN" optional="false"/>
+        <attribute name="infoString" type="String" mode="IN" optional="false"/>
+    </service>
+</services>
