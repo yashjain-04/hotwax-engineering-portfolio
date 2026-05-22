@@ -1,0 +1,39 @@
+<entity-engine-xml>
+
+    <ProdCatalog prodCatalogId="WINTER_COZY" catalogName="WINTER COZY CATALOG" useQuickAdd="Y"/>
+    
+    <ProductCategory productCategoryId="WINTER_COLLECTION" productCategoryTypeId="CATALOG_CATEGORY" categoryName="Winter Collection"/>
+    <ProductCategory productCategoryId="WINTER_APPAREL" productCategoryTypeId="CATALOG_CATEGORY" categoryName="Winter Apparel"/>
+    <ProductCategory productCategoryId="HEATING_APPLIANCES" productCategoryTypeId="CATALOG_CATEGORY" categoryName="Heating Appliances"/>
+    <ProductCategory productCategoryId="HOT_BEVERAGES" productCategoryTypeId="CATALOG_CATEGORY" categoryName="Hot Beverages"/>
+    
+    <ProductCategoryRollup parentProductCategoryId="WINTER_COLLECTION" productCategoryId="WINTER_APPAREL" fromDate="2024-01-01 00:00:00.0"/>
+    <ProductCategoryRollup parentProductCategoryId="WINTER_COLLECTION" productCategoryId="HEATING_APPLIANCES" fromDate="2024-01-01 00:00:00.0"/>
+    <ProductCategoryRollup parentProductCategoryId="WINTER_COLLECTION" productCategoryId="HOT_BEVERAGES" fromDate="2024-01-01 00:00:00.0"/>
+    
+    <ProdCatalogCategory prodCatalogId="WINTER_COZY" productCategoryId="WINTER_COLLECTION" fromDate="2024-01-01 00:00:00.0" sequenceNum="1" prodCatalogCategoryTypeId="PCCT_BROWSE_ROOT"/>
+    
+    <Product productId="PUFFER-JACKET" productTypeId="FINISHED_GOOD" internalName="Premium Puffer Jacket" isVirtual="N" isVariant="N"/>
+    <Product productId="WOOLEN-SOCKS" productTypeId="FINISHED_GOOD" internalName="Merino Woolen Socks Pack" isVirtual="N" isVariant="N"/>
+    <Product productId="SPACE-HEATER" productTypeId="FINISHED_GOOD" internalName="Oscillating Ceramic Space Heater" isVirtual="N" isVariant="N"/>
+    <Product productId="ELECTRIC-BLANKET" productTypeId="FINISHED_GOOD" internalName="Smart Electric Heated Blanket" isVirtual="N" isVariant="N"/>
+    <Product productId="ESPRESSO-MACHINE" productTypeId="FINISHED_GOOD" internalName="Automatic Espresso Machine" isVirtual="N" isVariant="N"/>
+    <Product productId="THERMAL-MUG" productTypeId="FINISHED_GOOD" internalName="Vacuum Insulated Thermal Mug" isVirtual="N" isVariant="N"/>
+    
+    <ProductPrice productId="PUFFER-JACKET" productPricePurposeId="PURCHASE" productPriceTypeId="DEFAULT_PRICE" currencyUomId="USD" productStoreGroupId="_NA_" fromDate="2024-01-01 00:00:00.0" price="120.00"/>
+    <ProductPrice productId="WOOLEN-SOCKS" productPricePurposeId="PURCHASE" productPriceTypeId="DEFAULT_PRICE" currencyUomId="USD" productStoreGroupId="_NA_" fromDate="2024-01-01 00:00:00.0" price="18.50"/>
+    <ProductPrice productId="SPACE-HEATER" productPricePurposeId="PURCHASE" productPriceTypeId="DEFAULT_PRICE" currencyUomId="USD" productStoreGroupId="_NA_" fromDate="2024-01-01 00:00:00.0" price="65.00"/>
+    <ProductPrice productId="ELECTRIC-BLANKET" productPricePurposeId="PURCHASE" productPriceTypeId="DEFAULT_PRICE" currencyUomId="USD" productStoreGroupId="_NA_" fromDate="2024-01-01 00:00:00.0" price="45.99"/>
+    <ProductPrice productId="ESPRESSO-MACHINE" productPricePurposeId="PURCHASE" productPriceTypeId="DEFAULT_PRICE" currencyUomId="USD" productStoreGroupId="_NA_" fromDate="2024-01-01 00:00:00.0" price="599.99"/>
+    <ProductPrice productId="THERMAL-MUG" productPricePurposeId="PURCHASE" productPriceTypeId="DEFAULT_PRICE" currencyUomId="USD" productStoreGroupId="_NA_" fromDate="2024-01-01 00:00:00.0" price="24.50"/>
+
+    <ProductCategoryMember productCategoryId="WINTER_APPAREL" productId="PUFFER-JACKET" fromDate="2024-01-01 00:00:00.0" sequenceNum="1"/>
+    <ProductCategoryMember productCategoryId="WINTER_APPAREL" productId="WOOLEN-SOCKS" fromDate="2024-01-01 00:00:00.0" sequenceNum="2"/>
+    <ProductCategoryMember productCategoryId="HEATING_APPLIANCES" productId="SPACE-HEATER" fromDate="2024-01-01 00:00:00.0" sequenceNum="1"/>
+    <ProductCategoryMember productCategoryId="HEATING_APPLIANCES" productId="ELECTRIC-BLANKET" fromDate="2024-01-01 00:00:00.0" sequenceNum="2"/>
+    <ProductCategoryMember productCategoryId="HOT_BEVERAGES" productId="ESPRESSO-MACHINE" fromDate="2024-01-01 00:00:00.0" sequenceNum="1"/>
+    <ProductCategoryMember productCategoryId="HOT_BEVERAGES" productId="THERMAL-MUG" fromDate="2024-01-01 00:00:00.0" sequenceNum="2"/>
+    
+    <ProductStoreCatalog productStoreId="9000" prodCatalogId="WINTER_COZY" fromDate="2024-01-01 00:00:00.0" sequenceNum="2"/>
+
+</entity-engine-xml>
