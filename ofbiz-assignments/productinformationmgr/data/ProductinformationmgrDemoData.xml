@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<entity-engine-xml>
+    <PimProductType productTypeId="FINISHED_GOOD" description="Finished Good"/>
+    <PimProductType productTypeId="DIGITAL_GOOD" description="Digital Good"/>
+    <PimProductType productTypeId="MARKETING_PKG" description="Marketing Package"/>
+
+    <PimProductContentType productContentTypeId="IMAGE" description="Image"/>
+    <PimProductContentType productContentTypeId="DESCRIPTION" description="Description"/>
+
+    <PimProductPriceType productPriceTypeId="LIST_PRICE" description="List Price"/>
+    <PimProductPriceType productPriceTypeId="PROMO_PRICE" description="Promotional Price"/>
+
+    <PimUom uomId="LEN_in" description="Length in inches"/>
+    <PimUom uomId="LEN_km" description="Length in km"/>
+    <PimUom uomId="WT_g" description="Weight in gram"/>
+    <PimUom uomId="WT_kg" description="Weight in kilogram"/>
+
+    <PimProductAssocType productAssocTypeId="PRODUCT_VARIANT" description="Product Variant"/>
+    <PimProductAssocType productAssocTypeId="PRODUCT_COMP" description="Product Component"/>
+
+    <PimGoodIdentificationType goodIdentificationTypeId="UPCA" description="UPC-A"/>
+    <PimGoodIdentificationType goodIdentificationTypeId="SKU" description="Stock Keeping Unit"/>
+
+    <PimProductFeatureType productFeatureTypeId="COLOR" description="Color"/>
+    <PimProductFeatureType productFeatureTypeId="SIZE" description="Size"/>
+
+    <!-- Demo Data for Products, Features, Categories -->
+    <PimProductCategory productCategoryId="CAT_ELECTRONICS" categoryName="Electronics"/>
+    <PimProductCategory productCategoryId="CAT_MOBILES" primaryParentCategoryId="CAT_ELECTRONICS" categoryName="Mobile Phones"/>
+    <PimProductCategory productCategoryId="CAT_LAPTOPS" primaryParentCategoryId="CAT_ELECTRONICS" categoryName="Laptops"/>
+
+    <PimProductFeature productFeatureId="FEAT_COLOR_RED" productFeatureTypeId="COLOR" description="Red"/>
+    <PimProductFeature productFeatureId="FEAT_COLOR_BLACK" productFeatureTypeId="COLOR" description="Black"/>
+    <PimProductFeature productFeatureId="FEAT_SIZE_64GB" productFeatureTypeId="SIZE" description="64 GB"/>
+    <PimProductFeature productFeatureId="FEAT_SIZE_128GB" productFeatureTypeId="SIZE" description="128 GB"/>
+
+    <PimProduct productId="PROD_IPHONE13" productTypeId="FINISHED_GOOD" productName="iPhone 13" isVirtual="N" isVariant="N"/>
+    <PimProduct productId="PROD_MACBOOK" productTypeId="FINISHED_GOOD" productName="MacBook Pro" isVirtual="N" isVariant="N"/>
+
+    <PimProductCategoryMember productCategoryId="CAT_MOBILES" productId="PROD_IPHONE13" fromDate="2024-01-01 00:00:00.000"/>
+    <PimProductCategoryMember productCategoryId="CAT_LAPTOPS" productId="PROD_MACBOOK" fromDate="2024-01-01 00:00:00.000"/>
+
+    <PimProductFeatureAppl productId="PROD_IPHONE13" productFeatureId="FEAT_COLOR_RED" fromDate="2024-01-01 00:00:00.000"/>
+    <PimProductFeatureAppl productId="PROD_IPHONE13" productFeatureId="FEAT_SIZE_128GB" fromDate="2024-01-01 00:00:00.000"/>
+</entity-engine-xml>
