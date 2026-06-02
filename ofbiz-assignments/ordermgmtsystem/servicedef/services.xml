@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://ofbiz.apache.org/dtds/services.xsd">
+    <description>Ordermgmtsystem Services</description>
+    <vendor></vendor>
+    <version>1.0</version>
+
+    <service name="noSyntaxError" engine="interface">
+        <description>
+            Dummy service to prevent empty files and syntax error - Remove when the 1st real service will be added here 
+        </description>
+    </service> 
+    
+    <service name="createOmsOrderHeader" default-entity-name="OmsOrderHeader" engine="entity-auto" invoke="create" auth="true">
+        <description>Create an OmsOrderHeader</description>
+        <auto-attributes include="nonpk" mode="IN" optional="true"/>
+        <auto-attributes include="pk" mode="INOUT" optional="true"/>
+    </service>
+    <service name="updateOmsOrderHeader" default-entity-name="OmsOrderHeader" engine="entity-auto" invoke="update" auth="true">
+        <description>Update an OmsOrderHeader</description>
+        <auto-attributes include="pk" mode="IN" optional="false"/>
+        <auto-attributes include="nonpk" mode="IN" optional="true"/>
+    </service>
+    <service name="deleteOmsOrderHeader" default-entity-name="OmsOrderHeader" engine="entity-auto" invoke="delete" auth="true">
+        <description>Delete an OmsOrderHeader</description>
+        <auto-attributes include="pk" mode="IN" optional="false"/>
+    </service>
+
+    <service name="createOmsOrderItem" default-entity-name="OmsOrderItem" engine="entity-auto" invoke="create" auth="true">
+        <description>Create an OmsOrderItem</description>
+        <auto-attributes include="pk" mode="INOUT" optional="true"/>
+        <auto-attributes include="nonpk" mode="IN" optional="true"/>
+        <override name="orderId" optional="false"/>
+    </service>
+    <service name="updateOmsOrderItem" default-entity-name="OmsOrderItem" engine="entity-auto" invoke="update" auth="true">
+        <description>Update an OmsOrderItem</description>
+        <auto-attributes include="pk" mode="IN" optional="false"/>
+        <auto-attributes include="nonpk" mode="IN" optional="true"/>
+    </service>
+    <service name="deleteOmsOrderItem" default-entity-name="OmsOrderItem" engine="entity-auto" invoke="delete" auth="true">
+        <description>Delete an OmsOrderItem</description>
+        <auto-attributes include="pk" mode="IN" optional="false"/>
+    </service>
+
+    <service name="createOmsOrderRole" default-entity-name="OmsOrderRole" engine="entity-auto" invoke="create" auth="true">
+        <description>Create an OmsOrderRole</description>
+        <auto-attributes include="pk" mode="IN" optional="false"/>
+    </service>
+    <service name="deleteOmsOrderRole" default-entity-name="OmsOrderRole" engine="entity-auto" invoke="delete" auth="true">
+        <description>Delete an OmsOrderRole</description>
+        <auto-attributes include="pk" mode="IN" optional="false"/>
+    </service>
+
+    <service name="createOmsOrderContactMech" default-entity-name="OmsOrderContactMech" engine="entity-auto" invoke="create" auth="true">
+        <description>Create an OmsOrderContactMech</description>
+        <auto-attributes include="pk" mode="IN" optional="false"/>
+    </service>
+    <service name="deleteOmsOrderContactMech" default-entity-name="OmsOrderContactMech" engine="entity-auto" invoke="delete" auth="true">
+        <description>Delete an OmsOrderContactMech</description>
+        <auto-attributes include="pk" mode="IN" optional="false"/>
+    </service>
+
+    <service name="createOmsOrderAdjustment" default-entity-name="OmsOrderAdjustment" engine="entity-auto" invoke="create" auth="true">
+        <description>Create an OmsOrderAdjustment</description>
+        <auto-attributes include="pk" mode="INOUT" optional="true"/>
+        <auto-attributes include="nonpk" mode="IN" optional="true"/>
+    </service>
+    <service name="updateOmsOrderAdjustment" default-entity-name="OmsOrderAdjustment" engine="entity-auto" invoke="update" auth="true">
+        <description>Update an OmsOrderAdjustment</description>
+        <auto-attributes include="pk" mode="IN" optional="false"/>
+        <auto-attributes include="nonpk" mode="IN" optional="true"/>
+    </service>
+    <service name="deleteOmsOrderAdjustment" default-entity-name="OmsOrderAdjustment" engine="entity-auto" invoke="delete" auth="true">
+        <description>Delete an OmsOrderAdjustment</description>
+        <auto-attributes include="pk" mode="IN" optional="false"/>
+    </service>
+
+    <service name="createOmsOrderStatus" default-entity-name="OmsOrderStatus" engine="entity-auto" invoke="create" auth="true">
+        <description>Create an OmsOrderStatus</description>
+        <auto-attributes include="pk" mode="INOUT" optional="true"/>
+        <auto-attributes include="nonpk" mode="IN" optional="true"/>
+    </service>
+    <service name="updateOmsOrderStatus" default-entity-name="OmsOrderStatus" engine="entity-auto" invoke="update" auth="true">
+        <description>Update an OmsOrderStatus</description>
+        <auto-attributes include="pk" mode="IN" optional="false"/>
+        <auto-attributes include="nonpk" mode="IN" optional="true"/>
+    </service>
+    <service name="deleteOmsOrderStatus" default-entity-name="OmsOrderStatus" engine="entity-auto" invoke="delete" auth="true">
+        <description>Delete an OmsOrderStatus</description>
+        <auto-attributes include="pk" mode="IN" optional="false"/>
+    </service>
+
+    <service name="createOmsOrderPaymentPreference" default-entity-name="OmsOrderPaymentPreference" engine="entity-auto" invoke="create" auth="true">
+        <description>Create an OmsOrderPaymentPreference</description>
+        <auto-attributes include="pk" mode="INOUT" optional="true"/>
+        <auto-attributes include="nonpk" mode="IN" optional="true"/>
+    </service>
+    <service name="updateOmsOrderPaymentPreference" default-entity-name="OmsOrderPaymentPreference" engine="entity-auto" invoke="update" auth="true">
+        <description>Update an OmsOrderPaymentPreference</description>
+        <auto-attributes include="pk" mode="IN" optional="false"/>
+        <auto-attributes include="nonpk" mode="IN" optional="true"/>
+    </service>
+    <service name="deleteOmsOrderPaymentPreference" default-entity-name="OmsOrderPaymentPreference" engine="entity-auto" invoke="delete" auth="true">
+        <description>Delete an OmsOrderPaymentPreference</description>
+        <auto-attributes include="pk" mode="IN" optional="false"/>
+    </service>
+</services>

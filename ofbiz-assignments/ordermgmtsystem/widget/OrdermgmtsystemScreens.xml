@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<screens xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://ofbiz.apache.org/Widget-Screen" xsi:schemaLocation="http://ofbiz.apache.org/Widget-Screen http://ofbiz.apache.org/dtds/widget-screen.xsd">
+
+    <screen name="FindOmsOrderHeader">
+        <section>
+            <actions>
+                <set field="headerItem" value="Orders"/>
+                <set field="titleProperty" value="Find Order"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="OrdermgmtsystemCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <screenlet title="Find Order">
+                            <include-form name="FindOmsOrderHeader" location="component://ordermgmtsystem/widget/OrdermgmtsystemForms.xml"/>
+                        </screenlet>
+                        <screenlet title="Order List">
+                            <include-form name="ListOmsOrderHeaders" location="component://ordermgmtsystem/widget/OrdermgmtsystemForms.xml"/>
+                        </screenlet>
+                        <screenlet title="Create New Order">
+                            <include-form name="EditOmsOrderHeader" location="component://ordermgmtsystem/widget/OrdermgmtsystemForms.xml"/>
+                        </screenlet>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <screen name="EditOmsOrderHeader">
+        <section>
+            <actions>
+                <set field="headerItem" value="Orders"/>
+                <set field="titleProperty" value="Edit Order"/>
+                <entity-one entity-name="OmsOrderHeader" value-field="omsOrderHeader"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="OrdermgmtsystemCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <screenlet title="Edit Order">
+                            <include-form name="EditOmsOrderHeader" location="component://ordermgmtsystem/widget/OrdermgmtsystemForms.xml"/>
+                        </screenlet>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+    <screen name="FindOmsOrderItem">
+        <section>
+            <actions>
+                <set field="headerItem" value="Items"/>
+                <set field="titleProperty" value="Find Order Item"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="OrdermgmtsystemCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <screenlet title="Find Order Item">
+                            <include-form name="FindOmsOrderItem" location="component://ordermgmtsystem/widget/OrdermgmtsystemForms.xml"/>
+                        </screenlet>
+                        <screenlet title="Order Item List">
+                            <include-form name="ListOmsOrderItems" location="component://ordermgmtsystem/widget/OrdermgmtsystemForms.xml"/>
+                        </screenlet>
+                        <screenlet title="Create New Order Item">
+                            <include-form name="EditOmsOrderItem" location="component://ordermgmtsystem/widget/OrdermgmtsystemForms.xml"/>
+                        </screenlet>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <screen name="EditOmsOrderItem">
+        <section>
+            <actions>
+                <set field="headerItem" value="Items"/>
+                <set field="titleProperty" value="Edit Order Item"/>
+                <entity-one entity-name="OmsOrderItem" value-field="omsOrderItem"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="OrdermgmtsystemCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <screenlet title="Edit Order Item">
+                            <include-form name="EditOmsOrderItem" location="component://ordermgmtsystem/widget/OrdermgmtsystemForms.xml"/>
+                        </screenlet>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+    <screen name="FindOmsOrderRole">
+        <section>
+            <actions>
+                <set field="headerItem" value="Roles"/>
+                <set field="titleProperty" value="Find Order Role"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="OrdermgmtsystemCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <screenlet title="Find Order Role">
+                            <include-form name="FindOmsOrderRole" location="component://ordermgmtsystem/widget/OrdermgmtsystemForms.xml"/>
+                        </screenlet>
+                        <screenlet title="Order Role List">
+                            <include-form name="ListOmsOrderRoles" location="component://ordermgmtsystem/widget/OrdermgmtsystemForms.xml"/>
+                        </screenlet>
+                        <screenlet title="Create New Order Role">
+                            <include-form name="EditOmsOrderRole" location="component://ordermgmtsystem/widget/OrdermgmtsystemForms.xml"/>
+                        </screenlet>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+    <screen name="FindOmsOrderContactMech">
+        <section>
+            <actions>
+                <set field="headerItem" value="ContactMechs"/>
+                <set field="titleProperty" value="Find Order Contact Mech"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="OrdermgmtsystemCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <screenlet title="Find Order Contact Mech">
+                            <include-form name="FindOmsOrderContactMech" location="component://ordermgmtsystem/widget/OrdermgmtsystemForms.xml"/>
+                        </screenlet>
+                        <screenlet title="Order Contact Mech List">
+                            <include-form name="ListOmsOrderContactMechs" location="component://ordermgmtsystem/widget/OrdermgmtsystemForms.xml"/>
+                        </screenlet>
+                        <screenlet title="Create New Order Contact Mech">
+                            <include-form name="EditOmsOrderContactMech" location="component://ordermgmtsystem/widget/OrdermgmtsystemForms.xml"/>
+                        </screenlet>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+    <screen name="FindOmsOrderAdjustment">
+        <section>
+            <actions>
+                <set field="headerItem" value="Adjustments"/>
+                <set field="titleProperty" value="Find Order Adjustment"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="OrdermgmtsystemCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <screenlet title="Find Order Adjustment">
+                            <include-form name="FindOmsOrderAdjustment" location="component://ordermgmtsystem/widget/OrdermgmtsystemForms.xml"/>
+                        </screenlet>
+                        <screenlet title="Order Adjustment List">
+                            <include-form name="ListOmsOrderAdjustments" location="component://ordermgmtsystem/widget/OrdermgmtsystemForms.xml"/>
+                        </screenlet>
+                        <screenlet title="Create New Order Adjustment">
+                            <include-form name="EditOmsOrderAdjustment" location="component://ordermgmtsystem/widget/OrdermgmtsystemForms.xml"/>
+                        </screenlet>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <screen name="EditOmsOrderAdjustment">
+        <section>
+            <actions>
+                <set field="headerItem" value="Adjustments"/>
+                <set field="titleProperty" value="Edit Order Adjustment"/>
+                <entity-one entity-name="OmsOrderAdjustment" value-field="omsOrderAdjustment"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="OrdermgmtsystemCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <screenlet title="Edit Order Adjustment">
+                            <include-form name="EditOmsOrderAdjustment" location="component://ordermgmtsystem/widget/OrdermgmtsystemForms.xml"/>
+                        </screenlet>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+    <screen name="FindOmsOrderStatus">
+        <section>
+            <actions>
+                <set field="headerItem" value="Statuses"/>
+                <set field="titleProperty" value="Find Order Status"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="OrdermgmtsystemCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <screenlet title="Find Order Status">
+                            <include-form name="FindOmsOrderStatus" location="component://ordermgmtsystem/widget/OrdermgmtsystemForms.xml"/>
+                        </screenlet>
+                        <screenlet title="Order Status List">
+                            <include-form name="ListOmsOrderStatuses" location="component://ordermgmtsystem/widget/OrdermgmtsystemForms.xml"/>
+                        </screenlet>
+                        <screenlet title="Create New Order Status">
+                            <include-form name="EditOmsOrderStatus" location="component://ordermgmtsystem/widget/OrdermgmtsystemForms.xml"/>
+                        </screenlet>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <screen name="EditOmsOrderStatus">
+        <section>
+            <actions>
+                <set field="headerItem" value="Statuses"/>
+                <set field="titleProperty" value="Edit Order Status"/>
+                <entity-one entity-name="OmsOrderStatus" value-field="omsOrderStatus"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="OrdermgmtsystemCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <screenlet title="Edit Order Status">
+                            <include-form name="EditOmsOrderStatus" location="component://ordermgmtsystem/widget/OrdermgmtsystemForms.xml"/>
+                        </screenlet>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+    <screen name="FindOmsOrderPaymentPreference">
+        <section>
+            <actions>
+                <set field="headerItem" value="Payments"/>
+                <set field="titleProperty" value="Find Order Payment Preference"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="OrdermgmtsystemCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <screenlet title="Find Order Payment Preference">
+                            <include-form name="FindOmsOrderPaymentPreference" location="component://ordermgmtsystem/widget/OrdermgmtsystemForms.xml"/>
+                        </screenlet>
+                        <screenlet title="Order Payment Preference List">
+                            <include-form name="ListOmsOrderPaymentPreferences" location="component://ordermgmtsystem/widget/OrdermgmtsystemForms.xml"/>
+                        </screenlet>
+                        <screenlet title="Create New Order Payment Preference">
+                            <include-form name="EditOmsOrderPaymentPreference" location="component://ordermgmtsystem/widget/OrdermgmtsystemForms.xml"/>
+                        </screenlet>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+    <screen name="EditOmsOrderPaymentPreference">
+        <section>
+            <actions>
+                <set field="headerItem" value="Payments"/>
+                <set field="titleProperty" value="Edit Order Payment Preference"/>
+                <entity-one entity-name="OmsOrderPaymentPreference" value-field="omsOrderPaymentPreference"/>
+            </actions>
+            <widgets>
+                <decorator-screen name="OrdermgmtsystemCommonDecorator" location="${parameters.mainDecoratorLocation}">
+                    <decorator-section name="body">
+                        <screenlet title="Edit Order Payment Preference">
+                            <include-form name="EditOmsOrderPaymentPreference" location="component://ordermgmtsystem/widget/OrdermgmtsystemForms.xml"/>
+                        </screenlet>
+                    </decorator-section>
+                </decorator-screen>
+            </widgets>
+        </section>
+    </screen>
+
+</screens>

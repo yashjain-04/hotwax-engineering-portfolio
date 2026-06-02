@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="https://ofbiz.apache.org/dtds/entitymodel.xsd">
+    <!-- ========================================================= -->
+    <!-- ======================== Defaults ======================= -->
+    <!-- ========================================================= -->
+    <title>Entity of Ordermgmtsystem Component</title>
+    <description>None</description>
+    <copyright></copyright>
+    <version></version>
+    <entity entity-name="OmsOrderType" package-name="com.hotwax.oms.order" title="Order Type">
+        <field name="orderTypeId" type="id"></field>
+        <field name="description" type="description"></field>
+        <prim-key field="orderTypeId"/>
+    </entity>
+
+    <entity entity-name="OmsOrderHeader" package-name="com.hotwax.oms.order" title="Order Header">
+        <field name="orderId" type="id"></field>
+        <field name="orderTypeId" type="id"></field>
+        <field name="orderName" type="name"></field>
+        <field name="externalId" type="id"></field>
+        <field name="orderDate" type="date-time"></field>
+        <field name="statusId" type="id"></field>
+        <prim-key field="orderId"/>
+        <relation type="one" fk-name="OMS_ORD_TYPE" rel-entity-name="OmsOrderType">
+            <key-map field-name="orderTypeId"/>
+        </relation>
+    </entity>
+
+    <entity entity-name="OmsOrderItemType" package-name="com.hotwax.oms.order" title="Order Item Type">
+        <field name="orderItemTypeId" type="id"></field>
+        <field name="description" type="description"></field>
+        <prim-key field="orderItemTypeId"/>
+    </entity>
+
+    <entity entity-name="OmsOrderItem" package-name="com.hotwax.oms.order" title="Order Item">
+        <field name="orderId" type="id"></field>
+        <field name="orderItemSeqId" type="id"></field>
+        <field name="orderItemTypeId" type="id"></field>
+        <field name="productId" type="id"></field>
+        <field name="quantity" type="fixed-point"></field>
+        <field name="unitPrice" type="currency-amount"></field>
+        <field name="itemDescription" type="description"></field>
+        <field name="statusId" type="id"></field>
+        <field name="estimatedShipDate" type="date-time"></field>
+        <field name="estimatedDeliveryDate" type="date-time"></field>
+        <prim-key field="orderId"/>
+        <prim-key field="orderItemSeqId"/>
+        <relation type="one" fk-name="OMS_OITM_HDR" rel-entity-name="OmsOrderHeader">
+            <key-map field-name="orderId"/>
+        </relation>
+        <relation type="one" fk-name="OMS_OITM_TYPE" rel-entity-name="OmsOrderItemType">
+            <key-map field-name="orderItemTypeId"/>
+        </relation>
+    </entity>
+
+    <entity entity-name="OmsOrderRole" package-name="com.hotwax.oms.order" title="Order Role">
+        <field name="orderId" type="id"></field>
+        <field name="partyId" type="id"></field>
+        <field name="roleTypeId" type="id"></field>
+        <prim-key field="orderId"/>
+        <prim-key field="partyId"/>
+        <prim-key field="roleTypeId"/>
+        <relation type="one" fk-name="OMS_ORL_HDR" rel-entity-name="OmsOrderHeader">
+            <key-map field-name="orderId"/>
+        </relation>
+    </entity>
+
+    <entity entity-name="OmsOrderContactMech" package-name="com.hotwax.oms.order" title="Order Contact Mech">
+        <field name="orderId" type="id"></field>
+        <field name="contactMechPurposeTypeId" type="id"></field>
+        <field name="contactMechId" type="id"></field>
+        <field name="orderItemSeqId" type="id"></field>
+        <prim-key field="orderId"/>
+        <prim-key field="contactMechPurposeTypeId"/>
+        <prim-key field="contactMechId"/>
+        <relation type="one" fk-name="OMS_OCM_HDR" rel-entity-name="OmsOrderHeader">
+            <key-map field-name="orderId"/>
+        </relation>
+    </entity>
+
+    <entity entity-name="OmsOrderAdjustmentType" package-name="com.hotwax.oms.order" title="Order Adjustment Type">
+        <field name="orderAdjustmentTypeId" type="id"></field>
+        <field name="description" type="description"></field>
+        <prim-key field="orderAdjustmentTypeId"/>
+    </entity>
+
+    <entity entity-name="OmsOrderAdjustment" package-name="com.hotwax.oms.order" title="Order Adjustment">
+        <field name="orderAdjustmentId" type="id"></field>
+        <field name="orderAdjustmentTypeId" type="id"></field>
+        <field name="orderId" type="id"></field>
+        <field name="orderItemSeqId" type="id"></field>
+        <field name="description" type="description"></field>
+        <field name="amount" type="currency-amount"></field>
+        <prim-key field="orderAdjustmentId"/>
+        <relation type="one" fk-name="OMS_OADJ_HDR" rel-entity-name="OmsOrderHeader">
+            <key-map field-name="orderId"/>
+        </relation>
+        <relation type="one" fk-name="OMS_OADJ_TYPE" rel-entity-name="OmsOrderAdjustmentType">
+            <key-map field-name="orderAdjustmentTypeId"/>
+        </relation>
+    </entity>
+
+    <entity entity-name="OmsOrderStatus" package-name="com.hotwax.oms.order" title="Order Status">
+        <field name="orderStatusId" type="id"></field>
+        <field name="statusTypeId" type="id"></field>
+        <field name="statusId" type="id"></field>
+        <field name="orderId" type="id"></field>
+        <field name="orderItemSeqId" type="id"></field>
+        <field name="orderPaymentPreferenceId" type="id"></field>
+        <field name="statusDatetime" type="date-time"></field>
+        <field name="statusUserLogin" type="id-long"></field>
+        <field name="changeReason" type="description"></field>
+        <prim-key field="orderStatusId"/>
+        <relation type="one" fk-name="OMS_OSTS_HDR" rel-entity-name="OmsOrderHeader">
+            <key-map field-name="orderId"/>
+        </relation>
+    </entity>
+
+    <entity entity-name="OmsOrderTermType" package-name="com.hotwax.oms.order" title="Order Term Type">
+        <field name="orderTermTypeId" type="id"></field>
+        <field name="description" type="description"></field>
+        <prim-key field="orderTermTypeId"/>
+    </entity>
+
+    <entity entity-name="OmsOrderTerm" package-name="com.hotwax.oms.order" title="Order Term">
+        <field name="orderTermId" type="id"></field>
+        <field name="orderTermTypeId" type="id"></field>
+        <field name="orderId" type="id"></field>
+        <field name="orderItemSeqId" type="id"></field>
+        <field name="termValue" type="currency-amount"></field>
+        <field name="termDays" type="numeric"></field>
+        <field name="textValue" type="description"></field>
+        <field name="description" type="description"></field>
+        <prim-key field="orderTermId"/>
+        <relation type="one" fk-name="OMS_OTRM_HDR" rel-entity-name="OmsOrderHeader">
+            <key-map field-name="orderId"/>
+        </relation>
+        <relation type="one" fk-name="OMS_OTRM_TYPE" rel-entity-name="OmsOrderTermType">
+            <key-map field-name="orderTermTypeId"/>
+        </relation>
+    </entity>
+
+    <entity entity-name="OmsOrderItemAssocType" package-name="com.hotwax.oms.order" title="Order Item Association Type">
+        <field name="orderItemAssocTypeId" type="id"></field>
+        <field name="description" type="description"></field>
+        <prim-key field="orderItemAssocTypeId"/>
+    </entity>
+
+    <entity entity-name="OmsOrderItemAssoc" package-name="com.hotwax.oms.order" title="Order Item Association">
+        <field name="orderId" type="id"></field>
+        <field name="orderItemSeqId" type="id"></field>
+        <field name="shipGroupSeqId" type="id"></field>
+        <field name="toOrderId" type="id"></field>
+        <field name="toOrderItemSeqId" type="id"></field>
+        <field name="toShipGroupSeqId" type="id"></field>
+        <field name="orderItemAssocTypeId" type="id"></field>
+        <field name="quantity" type="fixed-point"></field>
+        <prim-key field="orderId"/>
+        <prim-key field="orderItemSeqId"/>
+        <prim-key field="shipGroupSeqId"/>
+        <prim-key field="toOrderId"/>
+        <prim-key field="toOrderItemSeqId"/>
+        <prim-key field="toShipGroupSeqId"/>
+        <prim-key field="orderItemAssocTypeId"/>
+        <relation type="one" fk-name="OMS_OIA_HDR" title="Main" rel-entity-name="OmsOrderHeader">
+            <key-map field-name="orderId"/>
+        </relation>
+        <relation type="one" fk-name="OMS_OIA_TO_HDR" title="To" rel-entity-name="OmsOrderHeader">
+            <key-map field-name="toOrderId" rel-field-name="orderId"/>
+        </relation>
+        <relation type="one" fk-name="OMS_OIA_TYPE" rel-entity-name="OmsOrderItemAssocType">
+            <key-map field-name="orderItemAssocTypeId"/>
+        </relation>
+    </entity>
+
+    <entity entity-name="OmsOrderPaymentPreference" package-name="com.hotwax.oms.order" title="Order Payment Preference">
+        <field name="orderPaymentPreferenceId" type="id"></field>
+        <field name="orderId" type="id"></field>
+        <field name="orderItemSeqId" type="id"></field>
+        <field name="shipGroupSeqId" type="id"></field>
+        <field name="paymentMethodTypeId" type="id"></field>
+        <field name="paymentMethodId" type="id"></field>
+        <field name="finAccountId" type="id"></field>
+        <field name="maxAmount" type="currency-amount"></field>
+        <field name="statusId" type="id"></field>
+        <prim-key field="orderPaymentPreferenceId"/>
+        <relation type="one" fk-name="OMS_OPP_HDR" rel-entity-name="OmsOrderHeader">
+            <key-map field-name="orderId"/>
+        </relation>
+    </entity>
+
+</entitymodel>

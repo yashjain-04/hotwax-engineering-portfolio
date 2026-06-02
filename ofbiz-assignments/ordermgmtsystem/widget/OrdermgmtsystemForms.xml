@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://ofbiz.apache.org/Widget-Form" xsi:schemaLocation="http://ofbiz.apache.org/Widget-Form http://ofbiz.apache.org/dtds/widget-form.xsd">
+
+    <form name="FindOmsOrderHeader" type="single" target="FindOmsOrderHeader" default-entity-name="OmsOrderHeader">
+        <auto-fields-entity entity-name="OmsOrderHeader" default-field-type="find"/>
+        <field name="noConditionFind"><hidden value="Y"/></field>
+        <field name="searchButton" title="Search"><submit button-type="button"/></field>
+    </form>
+    <form name="ListOmsOrderHeaders" type="list" list-name="listIt" paginate-target="FindOmsOrderHeader" default-entity-name="OmsOrderHeader" separate-columns="true" odd-row-style="alternate-row" header-row-style="header-row-2" default-table-style="basic-table hover-bar">
+        <actions>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" value="OmsOrderHeader"/>
+                <field-map field-name="orderBy" from-field="parameters.sortField"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>
+            </service>
+        </actions>
+        <auto-fields-entity entity-name="OmsOrderHeader" default-field-type="display"/>
+        <field name="orderId" title="Order ID" widget-style="buttontext">
+            <hyperlink description="${orderId}" target="EditOmsOrderHeader" also-hidden="false">
+                <parameter param-name="orderId"/>
+            </hyperlink>
+        </field>
+        <field name="deleteLink" title=" " widget-style="buttontext">
+            <hyperlink description="Delete" target="deleteOmsOrderHeader" also-hidden="false">
+                <parameter param-name="orderId"/>
+            </hyperlink>
+        </field>
+    </form>
+    <form name="EditOmsOrderHeader" type="single" target="updateOmsOrderHeader" default-entity-name="OmsOrderHeader" default-map-name="omsOrderHeader">
+        <alt-target use-when="omsOrderHeader==null" target="createOmsOrderHeader"/>
+        <auto-fields-entity entity-name="OmsOrderHeader" default-field-type="edit"/>
+        <field name="orderId" use-when="omsOrderHeader!=null" title="Order ID"><display/></field>
+        <field name="orderId" use-when="omsOrderHeader==null" title="Order ID"><text/></field>
+        <field name="orderTypeId" title="Order Type">
+            <drop-down allow-empty="true">
+                <entity-options entity-name="OmsOrderType" key-field-name="orderTypeId" description="${description} [${orderTypeId}]"/>
+            </drop-down>
+        </field>
+        <field name="submitButton" title="Save"><submit button-type="button"/></field>
+    </form>
+
+    <form name="FindOmsOrderItem" type="single" target="FindOmsOrderItem" default-entity-name="OmsOrderItem">
+        <auto-fields-entity entity-name="OmsOrderItem" default-field-type="find"/>
+        <field name="noConditionFind"><hidden value="Y"/></field>
+        <field name="searchButton" title="Search"><submit button-type="button"/></field>
+    </form>
+    <form name="ListOmsOrderItems" type="list" list-name="listIt" paginate-target="FindOmsOrderItem" default-entity-name="OmsOrderItem" separate-columns="true" odd-row-style="alternate-row" header-row-style="header-row-2" default-table-style="basic-table hover-bar">
+        <actions>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" value="OmsOrderItem"/>
+                <field-map field-name="orderBy" from-field="parameters.sortField"/>
+                <field-map field-name="viewIndex" from-field="viewIndex"/>
+                <field-map field-name="viewSize" from-field="viewSize"/>
+            </service>
+        </actions>
+        <auto-fields-entity entity-name="OmsOrderItem" default-field-type="display"/>
+        <field name="orderId" title="Order ID" widget-style="buttontext">
+            <hyperlink description="${orderId}" target="EditOmsOrderItem" also-hidden="false">
+                <parameter param-name="orderId"/>
+                <parameter param-name="orderItemSeqId"/>
+            </hyperlink>
+        </field>
+        <field name="deleteLink" title=" " widget-style="buttontext">
+            <hyperlink description="Delete" target="deleteOmsOrderItem" also-hidden="false">
+                <parameter param-name="orderId"/>
+                <parameter param-name="orderItemSeqId"/>
+            </hyperlink>
+        </field>
+    </form>
+    <form name="EditOmsOrderItem" type="single" target="updateOmsOrderItem" default-entity-name="OmsOrderItem" default-map-name="omsOrderItem">
+        <alt-target use-when="omsOrderItem==null" target="createOmsOrderItem"/>
+        <auto-fields-entity entity-name="OmsOrderItem" default-field-type="edit"/>
+        <field name="orderId" use-when="omsOrderItem!=null" title="Order ID"><display/></field>
+        <field name="orderItemSeqId" use-when="omsOrderItem!=null" title="Item Seq ID"><display/></field>
+        <field name="orderId" use-when="omsOrderItem==null" title="Order ID"><text/></field>
+        <field name="orderItemSeqId" use-when="omsOrderItem==null" title="Item Seq ID"><text/></field>
+        <field name="orderItemTypeId" title="Item Type">
+            <drop-down allow-empty="true">
+                <entity-options entity-name="OmsOrderItemType" key-field-name="orderItemTypeId" description="${description} [${orderItemTypeId}]"/>
+            </drop-down>
+        </field>
+        <field name="submitButton" title="Save"><submit button-type="button"/></field>
+    </form>
+
+    <form name="FindOmsOrderRole" type="single" target="FindOmsOrderRole" default-entity-name="OmsOrderRole">
+        <auto-fields-entity entity-name="OmsOrderRole" default-field-type="find"/>
+        <field name="noConditionFind"><hidden value="Y"/></field>
+        <field name="searchButton" title="Search"><submit button-type="button"/></field>
+    </form>
+    <form name="ListOmsOrderRoles" type="list" list-name="listIt" paginate-target="FindOmsOrderRole" default-entity-name="OmsOrderRole" separate-columns="true" odd-row-style="alternate-row" header-row-style="header-row-2" default-table-style="basic-table hover-bar">
+        <actions>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" value="OmsOrderRole"/>
+            </service>
+        </actions>
+        <auto-fields-entity entity-name="OmsOrderRole" default-field-type="display"/>
+        <field name="deleteLink" title=" " widget-style="buttontext">
+            <hyperlink description="Delete" target="deleteOmsOrderRole" also-hidden="false">
+                <parameter param-name="orderId"/>
+                <parameter param-name="partyId"/>
+                <parameter param-name="roleTypeId"/>
+            </hyperlink>
+        </field>
+    </form>
+    <form name="EditOmsOrderRole" type="single" target="createOmsOrderRole" default-entity-name="OmsOrderRole">
+        <auto-fields-entity entity-name="OmsOrderRole" default-field-type="edit"/>
+        <field name="submitButton" title="Save"><submit button-type="button"/></field>
+    </form>
+
+    <form name="FindOmsOrderContactMech" type="single" target="FindOmsOrderContactMech" default-entity-name="OmsOrderContactMech">
+        <auto-fields-entity entity-name="OmsOrderContactMech" default-field-type="find"/>
+        <field name="noConditionFind"><hidden value="Y"/></field>
+        <field name="searchButton" title="Search"><submit button-type="button"/></field>
+    </form>
+    <form name="ListOmsOrderContactMechs" type="list" list-name="listIt" paginate-target="FindOmsOrderContactMech" default-entity-name="OmsOrderContactMech" separate-columns="true" odd-row-style="alternate-row" header-row-style="header-row-2" default-table-style="basic-table hover-bar">
+        <actions>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" value="OmsOrderContactMech"/>
+            </service>
+        </actions>
+        <auto-fields-entity entity-name="OmsOrderContactMech" default-field-type="display"/>
+        <field name="deleteLink" title=" " widget-style="buttontext">
+            <hyperlink description="Delete" target="deleteOmsOrderContactMech" also-hidden="false">
+                <parameter param-name="orderId"/>
+                <parameter param-name="contactMechPurposeTypeId"/>
+                <parameter param-name="contactMechId"/>
+            </hyperlink>
+        </field>
+    </form>
+    <form name="EditOmsOrderContactMech" type="single" target="createOmsOrderContactMech" default-entity-name="OmsOrderContactMech">
+        <auto-fields-entity entity-name="OmsOrderContactMech" default-field-type="edit"/>
+        <field name="submitButton" title="Save"><submit button-type="button"/></field>
+    </form>
+
+    <form name="FindOmsOrderAdjustment" type="single" target="FindOmsOrderAdjustment" default-entity-name="OmsOrderAdjustment">
+        <auto-fields-entity entity-name="OmsOrderAdjustment" default-field-type="find"/>
+        <field name="noConditionFind"><hidden value="Y"/></field>
+        <field name="searchButton" title="Search"><submit button-type="button"/></field>
+    </form>
+    <form name="ListOmsOrderAdjustments" type="list" list-name="listIt" paginate-target="FindOmsOrderAdjustment" default-entity-name="OmsOrderAdjustment" separate-columns="true" odd-row-style="alternate-row" header-row-style="header-row-2" default-table-style="basic-table hover-bar">
+        <actions>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" value="OmsOrderAdjustment"/>
+            </service>
+        </actions>
+        <auto-fields-entity entity-name="OmsOrderAdjustment" default-field-type="display"/>
+        <field name="orderAdjustmentId" title="ID" widget-style="buttontext">
+            <hyperlink description="${orderAdjustmentId}" target="EditOmsOrderAdjustment" also-hidden="false">
+                <parameter param-name="orderAdjustmentId"/>
+            </hyperlink>
+        </field>
+        <field name="deleteLink" title=" " widget-style="buttontext">
+            <hyperlink description="Delete" target="deleteOmsOrderAdjustment" also-hidden="false">
+                <parameter param-name="orderAdjustmentId"/>
+            </hyperlink>
+        </field>
+    </form>
+    <form name="EditOmsOrderAdjustment" type="single" target="updateOmsOrderAdjustment" default-entity-name="OmsOrderAdjustment" default-map-name="omsOrderAdjustment">
+        <alt-target use-when="omsOrderAdjustment==null" target="createOmsOrderAdjustment"/>
+        <auto-fields-entity entity-name="OmsOrderAdjustment" default-field-type="edit"/>
+        <field name="orderAdjustmentId" use-when="omsOrderAdjustment!=null" title="ID"><display/></field>
+        <field name="orderAdjustmentId" use-when="omsOrderAdjustment==null" title="ID"><text/></field>
+        <field name="orderAdjustmentTypeId" title="Type">
+            <drop-down allow-empty="true">
+                <entity-options entity-name="OmsOrderAdjustmentType" key-field-name="orderAdjustmentTypeId" description="${description} [${orderAdjustmentTypeId}]"/>
+            </drop-down>
+        </field>
+        <field name="submitButton" title="Save"><submit button-type="button"/></field>
+    </form>
+
+    <form name="FindOmsOrderStatus" type="single" target="FindOmsOrderStatus" default-entity-name="OmsOrderStatus">
+        <auto-fields-entity entity-name="OmsOrderStatus" default-field-type="find"/>
+        <field name="noConditionFind"><hidden value="Y"/></field>
+        <field name="searchButton" title="Search"><submit button-type="button"/></field>
+    </form>
+    <form name="ListOmsOrderStatuses" type="list" list-name="listIt" paginate-target="FindOmsOrderStatus" default-entity-name="OmsOrderStatus" separate-columns="true" odd-row-style="alternate-row" header-row-style="header-row-2" default-table-style="basic-table hover-bar">
+        <actions>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" value="OmsOrderStatus"/>
+            </service>
+        </actions>
+        <auto-fields-entity entity-name="OmsOrderStatus" default-field-type="display"/>
+        <field name="orderStatusId" title="ID" widget-style="buttontext">
+            <hyperlink description="${orderStatusId}" target="EditOmsOrderStatus" also-hidden="false">
+                <parameter param-name="orderStatusId"/>
+            </hyperlink>
+        </field>
+        <field name="deleteLink" title=" " widget-style="buttontext">
+            <hyperlink description="Delete" target="deleteOmsOrderStatus" also-hidden="false">
+                <parameter param-name="orderStatusId"/>
+            </hyperlink>
+        </field>
+    </form>
+    <form name="EditOmsOrderStatus" type="single" target="updateOmsOrderStatus" default-entity-name="OmsOrderStatus" default-map-name="omsOrderStatus">
+        <alt-target use-when="omsOrderStatus==null" target="createOmsOrderStatus"/>
+        <auto-fields-entity entity-name="OmsOrderStatus" default-field-type="edit"/>
+        <field name="orderStatusId" use-when="omsOrderStatus!=null" title="ID"><display/></field>
+        <field name="orderStatusId" use-when="omsOrderStatus==null" title="ID"><text/></field>
+        <field name="submitButton" title="Save"><submit button-type="button"/></field>
+    </form>
+
+    <form name="FindOmsOrderPaymentPreference" type="single" target="FindOmsOrderPaymentPreference" default-entity-name="OmsOrderPaymentPreference">
+        <auto-fields-entity entity-name="OmsOrderPaymentPreference" default-field-type="find"/>
+        <field name="noConditionFind"><hidden value="Y"/></field>
+        <field name="searchButton" title="Search"><submit button-type="button"/></field>
+    </form>
+    <form name="ListOmsOrderPaymentPreferences" type="list" list-name="listIt" paginate-target="FindOmsOrderPaymentPreference" default-entity-name="OmsOrderPaymentPreference" separate-columns="true" odd-row-style="alternate-row" header-row-style="header-row-2" default-table-style="basic-table hover-bar">
+        <actions>
+            <service service-name="performFind" result-map="result" result-map-list="listIt">
+                <field-map field-name="inputFields" from-field="parameters"/>
+                <field-map field-name="entityName" value="OmsOrderPaymentPreference"/>
+            </service>
+        </actions>
+        <auto-fields-entity entity-name="OmsOrderPaymentPreference" default-field-type="display"/>
+        <field name="orderPaymentPreferenceId" title="ID" widget-style="buttontext">
+            <hyperlink description="${orderPaymentPreferenceId}" target="EditOmsOrderPaymentPreference" also-hidden="false">
+                <parameter param-name="orderPaymentPreferenceId"/>
+            </hyperlink>
+        </field>
+        <field name="deleteLink" title=" " widget-style="buttontext">
+            <hyperlink description="Delete" target="deleteOmsOrderPaymentPreference" also-hidden="false">
+                <parameter param-name="orderPaymentPreferenceId"/>
+            </hyperlink>
+        </field>
+    </form>
+    <form name="EditOmsOrderPaymentPreference" type="single" target="updateOmsOrderPaymentPreference" default-entity-name="OmsOrderPaymentPreference" default-map-name="omsOrderPaymentPreference">
+        <alt-target use-when="omsOrderPaymentPreference==null" target="createOmsOrderPaymentPreference"/>
+        <auto-fields-entity entity-name="OmsOrderPaymentPreference" default-field-type="edit"/>
+        <field name="orderPaymentPreferenceId" use-when="omsOrderPaymentPreference!=null" title="ID"><display/></field>
+        <field name="orderPaymentPreferenceId" use-when="omsOrderPaymentPreference==null" title="ID"><text/></field>
+        <field name="submitButton" title="Save"><submit button-type="button"/></field>
+    </form>
+
+</forms>
