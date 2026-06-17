@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-2.1.xsd">
+    <transition name="createTutorial">
+        <service-call name="tutorial.TutorialServices.create#Tutorial"/>
+        <default-response url="."/>
+    </transition>
+
+    <actions>
+        <entity-find entity-name="tutorial.Tutorial" list="tutorialList">
+            <search-form-inputs/>
+        </entity-find>
+    </actions>
+
+    <widgets>
+        <container-dialog id="CreateTutorialDialog" button-text="Create Tutorial">
+            <form-single name="CreateTutorial" transition="createTutorial">
+                <auto-fields-entity entity-name="tutorial.Tutorial" field-type="edit"/>
+                <field name="submitButton"><default-field title="Create"><submit/></default-field></field>
+            </form-single>
+        </container-dialog>
+
+        <form-list name="ListTutorials" list="tutorialList" header-dialog="true" skip-form="true">
+            <auto-fields-entity entity-name="tutorial.Tutorial" field-type="find-display"/>
+            <field name="description">
+                <header-field show-order-by="true"><text-find hide-options="true"/></header-field>
+                <default-field><display/></default-field>
+            </field>
+        </form-list>
+    </widgets>
+</screen>
+
+
+
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
+<!--        xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-2.1.xsd">-->
+<!--    <actions>-->
+<!--        <entity-find entity-name="tutorial.Tutorial" list="tutorialList">-->
+<!--            <search-form-inputs/>-->
+<!--        </entity-find>-->
+<!--    </actions>-->
+<!--    <widgets>-->
+<!--        <form-list name="ListTutorials" list="tutorialList" header-dialog="true">-->
+<!--            <auto-fields-entity entity-name="tutorial.Tutorial" field-type="find-display"/>-->
+<!--            <field name="submitButton"><header-field title="Find"><submit/></header-field></field>-->
+<!--        </form-list>-->
+<!--    </widgets>-->
+<!--</screen>-->

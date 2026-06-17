@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/service-definition-2.1.xsd">
+    <service verb="create" noun="Tutorial" type="inline">
+        <in-parameters><auto-parameters include="all"/></in-parameters>
+        <out-parameters><auto-parameters include="pk" required="true"/></out-parameters>
+        <actions>
+            <entity-make-value entity-name="tutorial.Tutorial" value-field="tutorial"/>
+
+            <entity-set value-field="tutorial" include="all"/>
+
+            <if condition="!tutorial.tutorialId">
+                <entity-sequenced-id-primary value-field="tutorial"/>
+            </if>
+
+            <entity-create value-field="tutorial"/>
+        </actions>
+    </service>
+
+    <service verb="create" noun="TutorialGroovy" type="script"
+             location="component://tutorial/service/tutorial/createTutorial.groovy">
+        <in-parameters>
+            <auto-parameters entity-name="tutorial.Tutorial" include="all"/>
+        </in-parameters>
+        <out-parameters>
+            <auto-parameters entity-name="tutorial.Tutorial" include="pk" required="true"/>
+        </out-parameters>
+    </service>
+</services>
+
+
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
+<!--          xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/service-definition-2.1.xsd">-->
+<!--    <service verb="create" noun="Tutorial" type="entity-auto">-->
+<!--        <in-parameters>-->
+<!--            <auto-parameters include="all"/>-->
+<!--        </in-parameters>-->
+<!--        <out-parameters>-->
+<!--            <auto-parameters include="pk" required="true"/>-->
+<!--        </out-parameters>-->
+<!--    </service>-->
+<!--</services>-->
