@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<moqui-conf xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/moqui-conf-3.xsd">
+    <screen-facade>
+        <screen location="component://webroot/screen/webroot/apps.xml">
+            <subscreens-item name="partyApp" menu-title="Party Management" menu-index="100"
+                             location="component://party/screen/party/PartyScreen.xml"/>
+        </screen>
+    </screen-facade>
+</moqui-conf>
+
+<!--<?xml version="1.0" encoding="UTF-8" ?>-->
+<!--<moqui-conf xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
+<!--            xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/moqui-conf-3.0.xsd">-->
+<!--    <screen-facade>-->
+<!--        <screen location="component://webroot/screen/webroot/apps.xml">-->
+<!--            <subscreens-item name="party" menu-title="Party" menu-index="10"-->
+<!--                             location="component://party/screen/party/PartyScreen.xml"/>-->
+<!--        </screen>-->
+<!--    </screen-facade>-->
+<!--</moqui-conf>-->
