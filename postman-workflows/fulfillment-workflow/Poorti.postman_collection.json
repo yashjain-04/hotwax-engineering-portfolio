@@ -1,0 +1,208 @@
+{
+	"info": {
+		"_postman_id": "5fefc29c-ce05-4569-9a28-b193d8270b56",
+		"name": "Poorti",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "55395142",
+		"_collection_link": "https://yash-jain-db38c163-557055.postman.co/workspace/Yash-Jain's-Workspace~88bc7363-cdb1-456c-8fbd-5b2d7443bc9c/collection/55395142-5fefc29c-ce05-4569-9a28-b193d8270b56?action=share&source=collection_link&creator=55395142"
+	},
+	"item": [
+		{
+			"name": "Pick",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Parse the JSON response",
+							"let responseData = pm.response.json();",
+							"",
+							"// Make sure the shipmentIds array exists and grab the first one",
+							"if (responseData.shipmentIds && responseData.shipmentIds.length > 0) {",
+							"    pm.environment.set(\"shipmentId\", responseData.shipmentIds[0]); // Set the shipmentId in the environment variables",
+							"    pm.execution.setNextRequest(\"Pack\");",
+							"    console.log(\"Pick Executed\");",
+							"}",
+							"else{",
+							"    pm.execution.setNextRequest(null);",
+							"    console.log(\"Error while picking\");",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{bearerToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "{{contentType}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"packageName\": \"A\",\n    \"facilityId\": \"Austin\",\n    \"shipmentMethodTypeId\": \"STANDARD\",\n    \"statusId\": \"PICKLIST_ASSIGNED\",\n    \"pickers\": [\n        {\n            \"partyId\": \"10054\",\n            \"roleTypeId\": \"WAREHOUSE_PICKER\"\n        }\n    ],\n    \"orderItems\": [\n        {\n            \"orderId\": \"{{orderId}}\",\n            \"orderItemSeqId\": \"00101\",\n            \"shipGroupSeqId\": \"00002\",\n            \"productId\": \"M103588\",\n            \"quantity\": 1\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/createOrderFulfillmentWave",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"createOrderFulfillmentWave"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pack",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code === 200) {",
+							"    pm.execution.setNextRequest(\"Ship\");",
+							"    console.log(\"Pack Executed\");",
+							"}",
+							"else{",
+							"    console.log(\"Error while packing\");",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{bearerToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "{{contentType}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"shipmentId\": \"{{shipmentId}}\",\n    \"orderId\": \"{{orderId}}\",\n    \"facilityId\": \"Austin\",\n    \"rejectedOrderItems\": [],\n    \"shipmentPackageContents\": []\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/shipments/{{shipmentId}}/pack",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"shipments",
+						"{{shipmentId}}",
+						"pack"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ship",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.execution.setNextRequest(null);"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{bearerToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "{{contentType}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"shipmentId\": \"{{shipmentId}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/shipments/{{shipmentId}}/ship",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"shipments",
+						"{{shipmentId}}",
+						"ship"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "shipmentId",
+			"value": ""
+		},
+		{
+			"key": "orderId",
+			"value": ""
+		}
+	]
+}
