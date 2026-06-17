@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-facade-xml>
+    <moqui.basic.EnumerationType description="Party Type" enumTypeId="PartyType"/>
+    <moqui.basic.Enumeration enumId="PERSON" enumTypeId="PartyType" description="Person"/>
+    <moqui.basic.Enumeration enumId="PARTY_GROUP" enumTypeId="PartyType" description="Party Group"/>
+
+    <moqui.basic.EnumerationType description="Contact Mech Type" enumTypeId="ContactMechType"/>
+    <moqui.basic.Enumeration enumId="EMAIL" enumTypeId="ContactMechType" description="Email"/>
+    <moqui.basic.Enumeration enumId="TELECOM_NUMBER" enumTypeId="ContactMechType" description="Telecom Number"/>
+    <moqui.basic.Enumeration enumId="POSTAL_ADDRESS" enumTypeId="ContactMechType" description="Postal Address"/>
+
+    <party.Party partyId="100" partyTypeEnumId="PERSON" createdDate="2026-02-03 10:00:00"/>
+    <party.Person partyId="100" firstName="Yash" lastName="Jain" dateOfBirth="2004-11-15"/>
+
+    <party.Party partyId="200" partyTypeEnumId="PARTY_GROUP" createdDate="2026-02-03 11:00:00"/>
+    <party.PartyGroup partyId="200" groupName="HotWax Systems" description="Open Source Experts"/>
+
+    <party.ContactMech contactMechId="CM1" contactMechTypeId="EMAIL" infoString="yash@example.com"/>
+    <party.ContactMech contactMechId="CM2" contactMechTypeId="TELECOM_NUMBER" infoString="+91-9876543210"/>
+
+    <party.PartyContactMech partyId="100" contactMechId="CM1" fromDate="2026-02-03 12:00:00"/>
+    <party.PartyContactMech partyId="100" contactMechId="CM2" fromDate="2026-02-03 12:00:00"/>
+
+    <moqui.security.ArtifactGroup artifactGroupId="PARTY_ADMIN" description="Party Admin Group"/>
+
+    <moqui.security.ArtifactGroupMember artifactGroupId="PARTY_ADMIN" artifactName="party\..*"
+                                        artifactTypeEnumId="AT_ENTITY" inheritAuthz="Y"/>
+
+    <moqui.security.ArtifactGroupMember artifactGroupId="PARTY_ADMIN" artifactName="component://party/screen/party/PartyScreen.xml"
+                                        artifactTypeEnumId="AT_XML_SCREEN" inheritAuthz="Y"/>
+
+    <moqui.security.ArtifactAuthz artifactAuthzId="PARTY_ADMIN_ALLOW" userGroupId="ADMIN"
+                                  artifactGroupId="PARTY_ADMIN" authzActionEnumId="AUTHZA_ALL" authzTypeEnumId="AUTHZT_ALLOW"/>
+</entity-facade-xml>

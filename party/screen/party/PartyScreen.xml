@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-3.0.xsd"
+        default-menu-title="Party Management">
+
+    <transition name="createCustomParty">
+        <service-call name="create#party.Party"/>
+        <default-response url="."/>
+    </transition>
+
+    <actions>
+        <entity-find entity-name="party.Party" list="partyList"/>
+    </actions>
+
+    <widgets>
+        <container id="PartyContainer">
+            <label text="Party Management" type="h2"/>
+
+            <container-dialog id="CreatePartyDialog" button-text="Create New Party">
+                <form-single name="CreatePartyForm" transition="createCustomParty">
+                    <auto-fields-entity entity-name="party.Party" field-type="edit"/>
+
+                    <field name="partyTypeEnumId">
+                        <default-field title="Party Type">
+                            <drop-down allow-empty="false">
+                                <entity-options key="${enumId}" text="${description}">
+                                    <entity-find entity-name="moqui.basic.Enumeration">
+                                        <econdition field-name="enumTypeId" value="PartyType"/>
+                                    </entity-find>
+                                </entity-options>
+                            </drop-down>
+                        </default-field>
+                    </field>
+
+                    <field name="submitButton">
+                        <default-field title="Create"><submit/></default-field>
+                    </field>
+                </form-single>
+            </container-dialog>
+
+            <container style="margin-top:20px;">
+                <form-list name="PartyListForm" list="partyList" skip-form="true">
+                    <field name="partyId">
+                        <default-field title="ID">
+                            <display/>
+                        </default-field>
+                    </field>
+                    <field name="partyTypeEnumId">
+                        <default-field title="Type">
+                            <display-entity entity-name="moqui.basic.Enumeration" key-field-name="enumId" text="${description}"/>
+                        </default-field>
+                    </field>
+                </form-list>
+            </container>
+        </container>
+    </widgets>
+</screen>
+
+<!--Till Section 4, above is section 5 in which we have added the transition and create form logic-->
+
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<screen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
+<!--        xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/xml-screen-3.0.xsd"-->
+<!--        default-menu-title="Party Management">-->
+
+<!--    <actions>-->
+<!--        <entity-find entity-name="party.Party" list="partyList"/>-->
+<!--    </actions>-->
+
+<!--    <widgets>-->
+<!--        <container>-->
+<!--            <label text="Party List" type="h2"/>-->
+
+<!--            <form-list name="PartyListForm" list="partyList">-->
+<!--                <field name="partyId">-->
+<!--                    <header-field show-order-by="true" title="Party ID"/>-->
+<!--                    <default-field><display/></default-field>-->
+<!--                </field>-->
+
+<!--                <field name="partyTypeEnumId">-->
+<!--                    <header-field show-order-by="true" title="Type"/>-->
+<!--                    <default-field>-->
+<!--                        <display-entity entity-name="moqui.basic.Enumeration" key-field-name="enumId" text="${description}"/>-->
+<!--                    </default-field>-->
+<!--                </field>-->
+
+<!--                <field name="createdDate">-->
+<!--                    <header-field show-order-by="true" title="Created Date"/>-->
+<!--                    <default-field><display/></default-field>-->
+<!--                </field>-->
+<!--            </form-list>-->
+<!--        </container>-->
+<!--    </widgets>-->
+<!--</screen>-->
