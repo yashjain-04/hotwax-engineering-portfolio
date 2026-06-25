@@ -259,7 +259,7 @@ FROM order_header oh
 JOIN order_item_ship_group oisg ON oh.order_id = oisg.order_id
 LEFT JOIN facility f ON oisg.facility_id = f.facility_id
 WHERE oh.order_type_id = 'SALES_ORDER'
-    AND oh.status_id NOT IN('ORDER_COMPLETED', 'ORDER_CANCELLED', 'ORDER_REJECTED')
+    AND oh.status_id NOT IN('ORDER_COMPLETED', 'ORDER_CANCELLED')
 ```
 
 ---
