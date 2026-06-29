@@ -32,11 +32,11 @@ The engine requests a positive JDBC fetch size (default `100`). MySQL's Connecto
 
 # 2. Methodology & Baseline Measurements
 
-To ensure accurate results, we bypassed Gradle (`./gradlew run`) and launched the compiled application directly using the `java` executable. This allowed strict control over the JVM arguments required for the **Decisive Setup**.
+To ensure accurate results, I bypassed Gradle (`./gradlew run`) and launched the compiled application directly using the `java` executable. This allowed strict control over the JVM arguments required for the **Decisive Setup**.
 
 ## 2.1 Establishing the Unconstrained Memory Baseline
 
-Before applying constraints, we measured the server's default maximum memory capacity using a Groovy shell script.
+Before applying constraints, I measured the server's default maximum memory capacity using a Groovy shell script.
 
 ### Groovy
 
@@ -58,7 +58,7 @@ The JVM naturally allocates approximately **3.9 GB** of RAM. This massive buffer
 
 ## 2.2 Data Generation & Table Sizing
 
-We populated `test_large_entity` with over **8.3 million rows** to ensure the table's physical size far exceeded our planned memory constraint.
+I populated `test_large_entity` with over **8.3 million rows** to ensure the table's physical size far exceeded our planned memory constraint.
 
 ### SQL Verification
 
@@ -88,7 +88,7 @@ The target table size was approximately **566 MB**. Setting a JVM heap limit of 
 
 # 3. Code-Verified Facts & Driver Documentation
 
-Before executing the trap, we verified the underlying framework logic and primary source documentation as requested.
+Before executing the trap, I verified the underlying framework logic and primary source documentation as requested.
 
 ### Cursor Type
 
@@ -123,9 +123,9 @@ The official MySQL Connector/J documentation confirms:
 
 ## 4.1 The Conditional Control Run (`useCursorFetch=true`)
 
-We first booted the server using Moqui's default `mysql8` profile, which implicitly injects `useCursorFetch=true` into the connection string under the hood.
+I first booted the server using Moqui's default `mysql8` profile, which implicitly injects `useCursorFetch=true` into the connection string under the hood.
 
-We executed the `MemoryTest` service against the **8.3 million row** table.
+I executed the `MemoryTest` service against the **8.3 million row** table.
 
 ### Output
 
@@ -147,7 +147,7 @@ Because `useCursorFetch=true` was active, MySQL utilized a server-side cursor, s
 
 ## 4.2 The Decisive Setup Run (Strict Default Connection)
 
-To test the actual hypothesis (which dictates testing the default connection configuration **without** the `useCursorFetch` crutch), we implemented an inline JDBC configuration in `MoquiDevConf.xml` to forcefully strip away the framework's hidden safety net.
+To test the actual hypothesis (which dictates testing the default connection configuration **without** the `useCursorFetch` crutch), I implemented an inline JDBC configuration in `MoquiDevConf.xml` to forcefully strip away the framework's hidden safety net.
 
 ### XML
 
@@ -162,7 +162,7 @@ To test the actual hypothesis (which dictates testing the default connection con
 </entity-facade>
 ```
 
-We then booted the server with the strict **256 MB** memory constraint.
+I then booted the server with the strict **256 MB** memory constraint.
 
 ### Bash
 
@@ -170,7 +170,7 @@ We then booted the server with the strict **256 MB** memory constraint.
 java -Xmx256m -jar moqui.war -conf=conf/MoquiDevConf.xml
 ```
 
-We executed the `MemoryTest` service.
+I executed the `MemoryTest` service.
 
 ### Output
 
@@ -206,7 +206,7 @@ The Entity Engine's abstraction layer (`EntityFindBuilder.java`) actively coerce
 
 ## Business Impact
 
-The assumption that **"we can iterate a huge table safely"** using standard Moqui tools is false for MySQL unless server-side cursors are explicitly enabled in the configuration.
+The assumption that **"I can iterate a huge table safely"** using standard Moqui tools is false for MySQL unless server-side cursors are explicitly enabled in the configuration.
 
 Therefore, the architectural decision to read with raw, streaming JDBC for the **sim-routing sync engine** is justified and necessary to prevent fatal memory spikes during bulk cross-database loads.
 
@@ -233,4 +233,3 @@ to safely stream large tables without risking production server crashes.
 If developers must iterate over large datasets using the Entity Engine, they must ensure `useCursorFetch=true` is strictly enforced in the connection profile to utilize server-side cursors as a fallback safety measure.
 
 ---
-
