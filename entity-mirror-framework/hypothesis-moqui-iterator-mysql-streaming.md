@@ -13,6 +13,8 @@ To empirically test whether Moqui's Entity Engine iterator (`ec.entity.find(...)
 
 # 1. The Hypothesis Under Test
 
+**Original Source:** [Hypothesis Document](https://github.com/hotwax/sim-routing/blob/main/docs/hypothesis-moqui-iterator-mysql-streaming.md)
+
 ## The Current Assumption (H)
 
 When reading from a MySQL source with the default connection configuration, Moqui's `EntityListIterator` (`.iterator()`) streams rows row-by-row from the database and keeps JVM heap usage flat and bounded—independent of how many rows the query matches.
