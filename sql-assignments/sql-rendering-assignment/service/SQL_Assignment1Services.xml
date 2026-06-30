@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/service-definition-3.xsd">
+
+    <service verb="get" noun="A1Q01NewCustomerInJune2023">
+        <description>Servcie to get all the new customers in June 2023</description>
+        <out-parameters>
+            <parameter>name="renderedSql" type="String"</parameter>
+        </out-parameters>
+
+        <actions>
+            <script><![CDATA[
+                import org.moqui.entity.EntityDynamicView
+                import org.moqui.impl.entity.EntityFindBase
+                import org.moqui.impl.entity.EntityFindBuilder
+                import org.moqui.impl.entity.FieldInfo
+                import org.moqui.impl.entity.EntityJavaUtil.FieldOrderOptions
+                import org.moqui.entity.EntityCondition
+
+                def find = ec.entity.find("org.apache.ofbiz.party.party.Party")
+                EntityDynamicView dynamicView = find.makeEntityDynamicView()
+
+                dynamicView.addMemberEntity("P", "org.apache.ofbiz.party.party.Party", null, null, null)
+                dynamicView.addMemberEntity("Per", "org.apache.ofbiz.party.party.Person", "P", true, ["partyId" : "partyId"])
+                dynamicView.addMemberEntity("Pr", "org.apache.ofbiz.party.party.PartyRole", "Per", false, ["partyId" : "partyId"])
+                dynamicView.addMemberEntity("Pcm", "org.apache.ofbiz.party.contact.PartyContactMech", "Pr", true, ["partyId" : "partyId"])
+                dynamicView.addMemberEntity("Cm", "org.apache.ofbiz.party.contact.ContactMech", "Pcm", true, ["contactMechId" : "contactMechId"])
+                dynamicView.addMemberEntity("Tel", "org.apache.ofbiz.party.contact.TelecomNumber", "Cm", true, ["contactMechId" : "contactMechId"])
+
+                dynamicView.addAlias("P", "PARTY_ID", "partyId", null)
+                dynamicView.addAlias("Per", "FIRST_NAME", "firstName", null)
+                dynamicView.addAlias("Per", "LAST_NAME", "lastName", null)
+                dynamicView.addAlias("Cm", "EMAIL", "infoString", null)
+                dynamicView.addAlias("Tel", "CONTACT_NUMBER", "contactNumber", null)
+                dynamicView.addAlias("P", "CREATED_DATE", "createdDate", null)
+                dynamicView.addAlias("Pr", "roleTypeId", "roleTypeId", null)
+
+                find.condition("roleTypeId", "CUSTOMER")
+                    .condition("CREATED_DATE", EntityCondition.GREATER_THAN_EQUAL_TO, "2023-06-01")
+                    .condition("CREATED_DATE", EntityCondition.LESS_THAN, "2023-07-01")
+                    .selectFields(["PARTY_ID", "FIRST_NAME", "LAST_NAME", "EMAIL", "CONTACT_NUMBER", "CREATED_DATE"])
+
+                EntityFindBase findBase = (EntityFindBase) find
+                def ed = findBase.getEntityDef()
+                def whereCond = findBase.getWhereEntityConditionInternal(ed)
+
+                FieldInfo[] fieldInfoArray = ed.entityInfo.allFieldInfoArray
+                FieldOrderOptions[] fieldOptionsArray = new FieldOrderOptions[fieldInfoArray.length]
+
+                EntityFindBuilder efb = new EntityFindBuilder(ed, findBase, whereCond, fieldInfoArray)
+                efb.makeSqlSelectFields(fieldInfoArray, fieldOptionsArray, false)
+                efb.makeSqlFromClause()
+                efb.makeWhereClause()
+
+                renderedSql = efb.sqlTopLevel.toString()
+                String formattedSql = renderedSql
+                    .replaceAll(" SELECT ", "\nSELECT ")
+                    .replaceAll(", ", ", \n    ")
+                    .replaceAll(" FROM ", "\nFROM ")
+                    .replaceAll(" ON ", "\n    ON ")
+                    .replaceAll(" WHERE ", "\nWHERE ")
+                    .replaceAll(" LEFT JOIN ", "\nLEFT JOIN ")
+                    .replaceAll(" AND ", "\n    AND ")
+                    .replaceAll(" ORDER BY ", "\nORDER BY ");
+
+                ec.logger.info("======== INTERCEPTED SQL (Formatted):\n" + formattedSql)
+                productList = find.list()
+                ec.logger.info("Total Rows Fetched: " + productList.size())
+            ]]></script>    
+        </actions>
+    </service>
+    
+    <!-- Following the assignment naming convention: get#A1Q02ActivePhysicalProducts -->
+    <service verb="get" noun="A1Q02ActivePhysicalProducts">
+        <description>Service to get physical products that are not virtual</description>
+        <out-parameters>
+            <!-- <parameter name="productList" type="List"/> -->
+            <!-- We will return the intercepted SQL string to prove Part 4 -->
+            <parameter name="renderedSql" type="String"/> 
+        </out-parameters>
+        <actions>
+            <script><![CDATA[
+                import org.moqui.entity.EntityDynamicView
+                import org.moqui.impl.entity.EntityFindBase
+                import org.moqui.impl.entity.EntityFindBuilder
+                import org.moqui.impl.entity.FieldInfo
+                import org.moqui.impl.entity.EntityJavaUtil.FieldOrderOptions
+                import org.moqui.entity.EntityCondition
+
+                def find = ec.entity.find("org.apache.ofbiz.product.product.Product")
+                EntityDynamicView dynamicView = find.makeEntityDynamicView()
+
+                dynamicView.addMemberEntity("PRD", "org.apache.ofbiz.product.product.Product", null, null, null)
+                dynamicView.addMemberEntity("PT", "org.apache.ofbiz.product.product.ProductType", "PRD", false, ["productTypeId": "productTypeId"])
+
+                dynamicView.addAlias("PRD", "productId", "productId", null)
+                dynamicView.addAlias("PRD", "internalName", "internalName", null)
+                dynamicView.addAlias("PRD", "isVirtual", "isVirtual", null)
+                dynamicView.addAlias("PT", "productTypeId", "productTypeId", null)
+                dynamicView.addAlias("PT", "isPhysical", "isPhysical", null)
+
+                find.condition("isPhysical", "Y")
+                    .condition("isVirtual", EntityCondition.NOT_EQUAL, "Y")
+                    .selectFields(["productId", "productTypeId", "internalName"])
+
+                EntityFindBase findBase = (EntityFindBase) find
+                def ed = findBase.getEntityDef()
+                def whereCond = findBase.getWhereEntityConditionInternal(ed)
+
+                FieldInfo[] fieldInfoArray = ed.entityInfo.allFieldInfoArray
+                FieldOrderOptions[] fieldOptionsArray = new FieldOrderOptions[fieldInfoArray.length]
+
+                EntityFindBuilder efb = new EntityFindBuilder(ed, findBase, whereCond, fieldInfoArray)
+                efb.makeSqlSelectFields(fieldInfoArray, fieldOptionsArray, false)
+                efb.makeSqlFromClause()
+                efb.makeWhereClause()
+
+                renderedSql = efb.sqlTopLevel.toString()
+                String formattedSql = renderedSql
+                    .replaceAll(" SELECT ", "\nSELECT ")
+                    .replaceAll(", ", ", \n    ")
+                    .replaceAll(" FROM ", "\nFROM ")
+                    .replaceAll(" ON ", "\n    ON ")
+                    .replaceAll(" WHERE ", "\nWHERE ")
+                    .replaceAll(" LEFT JOIN ", "\nLEFT JOIN ")
+                    .replaceAll(" AND ", "\n    AND ")
+                    .replaceAll(" ORDER BY ", "\nORDER BY ");
+
+                ec.logger.info("======== INTERCEPTED SQL (Formatted):\n" + formattedSql)
+
+                productList = find.list()
+                ec.logger.info("Total Rows Fetched: " + productList.size())
+            ]]></script>
+        </actions>
+    </service>
+
+</services>
