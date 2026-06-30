@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://ofbiz.apache.org/Widget-Form" xsi:schemaLocation="http://ofbiz.apache.org/Widget-Form http://ofbiz.apache.org/dtds/widget-form.xsd">
+
+    <!-- Form for creating/updating a product -->
+    <form name="EditProduct" type="single" target="createProduct" default-map-name="product">
+        <alt-target use-when="product!=null" target="updateProduct"/>
+        
+        <field name="productId" use-when="product!=null" title="Product ID"><display/></field>
+        <field name="productId" use-when="product==null" title="Product ID (Leave blank to auto-generate)"><hidden/></field>
+
+        <field name="productName" title="Product Name" required-field="true">
+            <text size="40"/>
+        </field>
+
+        <field name="internalName" title="Internal Name">
+            <text size="40"/>
+        </field>
+
+        <field name="description" title="Description">
+            <text size="60"/>
+        </field>
+
+        <field name="productCategoryId" title="Product Category" required-field="true" use-when="product==null">
+            <drop-down allow-empty="false">
+                <entity-options entity-name="ProductCategory" description="${categoryName} [${productCategoryId}]">
+                    <entity-order-by field-name="categoryName"/>
+                </entity-options>
+            </drop-down>
+        </field>
+
+        <field name="price" title="List Price" required-field="true" entry-name="currentPrice.price">
+            <text size="10"/>
+        </field>
+        <field name="currencyUomId" title="Currency" entry-name="currentPrice.currencyUomId">
+            <text size="5" default-value="USD"/>
+        </field>
+
+        <field name="productFeatureId" title="Assign Feature" use-when="product!=null">
+            <drop-down allow-empty="true">
+                <entity-options entity-name="ProductFeature" description="${description} [${productFeatureId}]">
+                    <entity-order-by field-name="description"/>
+                </entity-options>
+            </drop-down>
+        </field>
+        <field name="productFeatureApplTypeId" title="Feature Appl Type" use-when="product!=null">
+            <drop-down allow-empty="false">
+                <entity-options entity-name="ProductFeatureApplType" description="${description} [${productFeatureApplTypeId}]">
+                    <entity-order-by field-name="description"/>
+                </entity-options>
+            </drop-down>
+        </field>
+
+        <field name="productTypeId" title="Product Type" use-when="product==null">
+            <text size="20" default-value="FINISHED_GOOD"/>
+        </field>
+
+        <field name="submitButton" title="Create Product" use-when="product==null">
+            <submit button-type="button"/>
+        </field>
+        <field name="submitButton" title="Update Product" use-when="product!=null">
+            <submit button-type="button"/>
+        </field>
+    </form>
+
+</forms>

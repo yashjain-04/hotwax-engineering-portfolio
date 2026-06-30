@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<entitymodel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="https://ofbiz.apache.org/dtds/entitymodel.xsd">
+    <!-- ========================================================= -->
+    <!-- ======================== Defaults ======================= -->
+    <!-- ========================================================= -->
+    <title>Entity of ProductManagement Component</title>
+    <description>None</description>
+    <copyright></copyright>
+    <version></version>
+
+    <!-- FindProductView: View entity joining Product, ProductPrice,-->
+    <!-- ProductCategoryMember, ProductCategory,                    -->
+    <!-- ProductFeatureAppl, and ProductFeature                     -->
+    <view-entity entity-name="FindProductView"
+            package-name="org.apache.ofbiz.productmanagement"
+            title="Find Product View - Joins Product with Price, Category and Feature">
+        <member-entity entity-alias="PROD" entity-name="Product"/>
+        <member-entity entity-alias="PP" entity-name="ProductPrice"/>
+        <member-entity entity-alias="PCM" entity-name="ProductCategoryMember"/>
+        <member-entity entity-alias="PC" entity-name="ProductCategory"/>
+        <member-entity entity-alias="PFA" entity-name="ProductFeatureAppl"/>
+        <member-entity entity-alias="PF" entity-name="ProductFeature"/>
+
+        <!-- Product fields -->
+        <alias entity-alias="PROD" name="productId"/>
+        <alias entity-alias="PROD" name="productName"/>
+        <alias entity-alias="PROD" name="internalName"/>
+        <alias entity-alias="PROD" name="productTypeId"/>
+        <alias entity-alias="PROD" name="isVirtual"/>
+        <alias entity-alias="PROD" name="isVariant"/>
+        <alias entity-alias="PROD" name="description"/>
+
+        <!-- ProductPrice fields -->
+        <alias entity-alias="PP" name="price"/>
+        <alias entity-alias="PP" name="currencyUomId"/>
+        <alias entity-alias="PP" name="productPriceTypeId"/>
+        <alias entity-alias="PP" name="productPricePurposeId"/>
+        <alias entity-alias="PP" name="productStoreGroupId"/>
+        <alias entity-alias="PP" name="priceFromDate" field="fromDate"/>
+        <alias entity-alias="PP" name="priceThruDate" field="thruDate"/>
+
+        <!-- ProductCategoryMember fields -->
+        <alias entity-alias="PCM" name="productCategoryId"/>
+        <alias entity-alias="PCM" name="categoryFromDate" field="fromDate"/>
+        <alias entity-alias="PCM" name="categoryThruDate" field="thruDate"/>
+
+        <!-- ProductCategory fields -->
+        <alias entity-alias="PC" name="categoryName"/>
+
+        <!-- ProductFeatureAppl fields -->
+        <alias entity-alias="PFA" name="productFeatureId"/>
+        <alias entity-alias="PFA" name="productFeatureApplTypeId"/>
+        <alias entity-alias="PFA" name="featureFromDate" field="fromDate"/>
+        <alias entity-alias="PFA" name="featureThruDate" field="thruDate"/>
+
+        <!-- ProductFeature fields -->
+        <alias entity-alias="PF" name="productFeatureTypeId"/>
+        <alias entity-alias="PF" name="featureDescription" field="description"/>
+
+        <!-- Joins -->
+        <view-link entity-alias="PROD" rel-entity-alias="PP" rel-optional="true">
+            <key-map field-name="productId"/>
+        </view-link>
+        <view-link entity-alias="PROD" rel-entity-alias="PCM" rel-optional="true">
+            <key-map field-name="productId"/>
+        </view-link>
+        <view-link entity-alias="PCM" rel-entity-alias="PC" rel-optional="true">
+            <key-map field-name="productCategoryId"/>
+        </view-link>
+        <view-link entity-alias="PROD" rel-entity-alias="PFA" rel-optional="true">
+            <key-map field-name="productId"/>
+        </view-link>
+        <view-link entity-alias="PFA" rel-entity-alias="PF" rel-optional="true">
+            <key-map field-name="productFeatureId"/>
+        </view-link>
+    </view-entity>
+
+</entitymodel>

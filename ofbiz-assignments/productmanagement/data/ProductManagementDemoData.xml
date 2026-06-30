@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<entity-engine-xml>
+    <!-- ========================================================= -->
+    <!-- Demo data for testing the ProductManagement plugin          -->
+    <!-- ========================================================= -->
+
+    <!-- Product Categories -->
+    <ProductCategory productCategoryId="PM_CAT_ELECTRONICS" productCategoryTypeId="CATALOG_CATEGORY" categoryName="Electronics" description="Electronic Products"/>
+    <ProductCategory productCategoryId="PM_CAT_CLOTHING" productCategoryTypeId="CATALOG_CATEGORY" categoryName="Clothing" description="Clothing and Apparel"/>
+    <ProductCategory productCategoryId="PM_CAT_ACCESSORIES" productCategoryTypeId="CATALOG_CATEGORY" categoryName="Accessories" description="Product Accessories"/>
+
+    <!-- Product Feature Types (using existing standard types) -->
+    <!-- COLOR and SIZE are standard OFBiz ProductFeatureType entries loaded by seed data -->
+
+    <!-- Product Features -->
+    <ProductFeature productFeatureId="PM_COLOR_RED" productFeatureTypeId="COLOR" description="Red"/>
+    <ProductFeature productFeatureId="PM_COLOR_BLUE" productFeatureTypeId="COLOR" description="Blue"/>
+    <ProductFeature productFeatureId="PM_COLOR_BLACK" productFeatureTypeId="COLOR" description="Black"/>
+    <ProductFeature productFeatureId="PM_SIZE_S" productFeatureTypeId="SIZE" description="Small"/>
+    <ProductFeature productFeatureId="PM_SIZE_M" productFeatureTypeId="SIZE" description="Medium"/>
+    <ProductFeature productFeatureId="PM_SIZE_L" productFeatureTypeId="SIZE" description="Large"/>
+
+    <!-- Demo Products -->
+    <Product productId="PM_PROD_001" productTypeId="FINISHED_GOOD" productName="Wireless Headphones" internalName="Wireless Headphones" description="Premium wireless noise-cancelling headphones" isVirtual="N" isVariant="N" createdDate="2024-01-01 00:00:00.0"/>
+    <Product productId="PM_PROD_002" productTypeId="FINISHED_GOOD" productName="Cotton T-Shirt" internalName="Cotton T-Shirt" description="100% organic cotton t-shirt" isVirtual="Y" isVariant="N" createdDate="2024-01-01 00:00:00.0"/>
+    <Product productId="PM_PROD_003" productTypeId="FINISHED_GOOD" productName="Cotton T-Shirt - Red Small" internalName="Cotton T-Shirt - Red Small" description="Red small cotton t-shirt variant" isVirtual="N" isVariant="Y" createdDate="2024-01-01 00:00:00.0"/>
+    <Product productId="PM_PROD_004" productTypeId="FINISHED_GOOD" productName="Cotton T-Shirt - Blue Medium" internalName="Cotton T-Shirt - Blue Medium" description="Blue medium cotton t-shirt variant" isVirtual="N" isVariant="Y" createdDate="2024-01-01 00:00:00.0"/>
+    <Product productId="PM_PROD_005" productTypeId="FINISHED_GOOD" productName="Laptop Bag" internalName="Laptop Bag" description="Premium leather laptop bag" isVirtual="N" isVariant="N" createdDate="2024-01-01 00:00:00.0"/>
+
+    <!-- Product Category Memberships -->
+    <ProductCategoryMember productCategoryId="PM_CAT_ELECTRONICS" productId="PM_PROD_001" fromDate="2024-01-01 00:00:00.0"/>
+    <ProductCategoryMember productCategoryId="PM_CAT_CLOTHING" productId="PM_PROD_002" fromDate="2024-01-01 00:00:00.0"/>
+    <ProductCategoryMember productCategoryId="PM_CAT_CLOTHING" productId="PM_PROD_003" fromDate="2024-01-01 00:00:00.0"/>
+    <ProductCategoryMember productCategoryId="PM_CAT_CLOTHING" productId="PM_PROD_004" fromDate="2024-01-01 00:00:00.0"/>
+    <ProductCategoryMember productCategoryId="PM_CAT_ACCESSORIES" productId="PM_PROD_005" fromDate="2024-01-01 00:00:00.0"/>
+
+    <!-- Product Prices (LIST_PRICE for PURCHASE purpose) -->
+    <ProductPrice productId="PM_PROD_001" productPriceTypeId="LIST_PRICE" productPricePurposeId="PURCHASE" currencyUomId="USD" productStoreGroupId="_NA_" fromDate="2024-01-01 00:00:00.0" price="149.99"/>
+    <ProductPrice productId="PM_PROD_002" productPriceTypeId="LIST_PRICE" productPricePurposeId="PURCHASE" currencyUomId="USD" productStoreGroupId="_NA_" fromDate="2024-01-01 00:00:00.0" price="29.99"/>
+    <ProductPrice productId="PM_PROD_003" productPriceTypeId="LIST_PRICE" productPricePurposeId="PURCHASE" currencyUomId="USD" productStoreGroupId="_NA_" fromDate="2024-01-01 00:00:00.0" price="29.99"/>
+    <ProductPrice productId="PM_PROD_004" productPriceTypeId="LIST_PRICE" productPricePurposeId="PURCHASE" currencyUomId="USD" productStoreGroupId="_NA_" fromDate="2024-01-01 00:00:00.0" price="29.99"/>
+    <ProductPrice productId="PM_PROD_005" productPriceTypeId="LIST_PRICE" productPricePurposeId="PURCHASE" currencyUomId="USD" productStoreGroupId="_NA_" fromDate="2024-01-01 00:00:00.0" price="59.99"/>
+
+    <!-- Product Feature Applications -->
+    <ProductFeatureAppl productId="PM_PROD_003" productFeatureId="PM_COLOR_RED" productFeatureApplTypeId="STANDARD_FEATURE" fromDate="2024-01-01 00:00:00.0"/>
+    <ProductFeatureAppl productId="PM_PROD_003" productFeatureId="PM_SIZE_S" productFeatureApplTypeId="STANDARD_FEATURE" fromDate="2024-01-01 00:00:00.0"/>
+    <ProductFeatureAppl productId="PM_PROD_004" productFeatureId="PM_COLOR_BLUE" productFeatureApplTypeId="STANDARD_FEATURE" fromDate="2024-01-01 00:00:00.0"/>
+    <ProductFeatureAppl productId="PM_PROD_004" productFeatureId="PM_SIZE_M" productFeatureApplTypeId="STANDARD_FEATURE" fromDate="2024-01-01 00:00:00.0"/>
+    <ProductFeatureAppl productId="PM_PROD_001" productFeatureId="PM_COLOR_BLACK" productFeatureApplTypeId="STANDARD_FEATURE" fromDate="2024-01-01 00:00:00.0"/>
+
+    <!-- Virtual-Variant Product Associations -->
+    <ProductAssoc productId="PM_PROD_002" productIdTo="PM_PROD_003" productAssocTypeId="PRODUCT_VARIANT" fromDate="2024-01-01 00:00:00.0"/>
+    <ProductAssoc productId="PM_PROD_002" productIdTo="PM_PROD_004" productAssocTypeId="PRODUCT_VARIANT" fromDate="2024-01-01 00:00:00.0"/>
+</entity-engine-xml>

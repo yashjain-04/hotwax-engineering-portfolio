@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
+
+<services xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://ofbiz.apache.org/dtds/services.xsd">
+    <description>ProductManagement Services</description>
+    <vendor></vendor>
+    <version>1.0</version>
+
+    <service name="noSyntaxError" engine="interface">
+        <description>
+            Dummy service to prevent empty files and syntax error - Remove when the 1st real service will be added here 
+        </description>
+    </service>
+
+    <!-- Step 4: findProduct Service                                -->
+    <!-- Searches products using filters: productId, productName,   -->
+    <!-- price range, product feature. Supports case-insensitive    -->
+    <!-- and partial matches.                                       -->
+    <service name="findProduct" engine="groovy"
+            location="component://productmanagement/groovyScripts/ProductManagementServices.groovy"
+            invoke="findProduct" auth="true">
+        <description>Find products based on various search criteria with case-insensitive partial matching</description>
+        <attribute name="productId" type="String" mode="IN" optional="true"/>
+        <attribute name="productName" type="String" mode="IN" optional="true"/>
+        <attribute name="minPrice" type="BigDecimal" mode="IN" optional="true"/>
+        <attribute name="maxPrice" type="BigDecimal" mode="IN" optional="true"/>
+        <attribute name="productFeatureId" type="String" mode="IN" optional="true"/>
+        <attribute name="productFeatureTypeId" type="String" mode="IN" optional="true"/>
+        <attribute name="productCategoryId" type="String" mode="IN" optional="true"/>
+        <attribute name="productList" type="java.util.List" mode="OUT" optional="true"/>
+    </service>
+
+    <!-- Step 5: createProduct Service                              -->
+    <!-- Creates a new product with unique name validation.         -->
+    <!-- Uses findProduct to check for existing product by name.    -->
+    <service name="createProduct" engine="groovy"
+            location="component://productmanagement/groovyScripts/ProductManagementServices.groovy"
+            invoke="createProduct" auth="true">
+        <description>Create a new product with unique name enforcement, category assignment, and list price</description>
+        <attribute name="productName" type="String" mode="IN" optional="false"/>
+        <attribute name="productCategoryId" type="String" mode="IN" optional="false"/>
+        <attribute name="price" type="BigDecimal" mode="IN" optional="false"/>
+        <attribute name="internalName" type="String" mode="IN" optional="true"/>
+        <attribute name="description" type="String" mode="IN" optional="true"/>
+        <attribute name="productTypeId" type="String" mode="IN" optional="true"/>
+        <attribute name="currencyUomId" type="String" mode="IN" optional="true"/>
+        <attribute name="productId" type="String" mode="OUT" optional="false"/>
+    </service>
+
+    <!-- Step 5: updateProduct Service                              -->
+    <!-- Updates product price and/or feature assignments.          -->
+    <!-- Verifies product existence before applying updates.        -->
+    <service name="updateProduct" engine="groovy"
+            location="component://productmanagement/groovyScripts/ProductManagementServices.groovy"
+            invoke="updateProduct" auth="true">
+        <description>Update an existing product's details, price and features</description>
+        <attribute name="productId" type="String" mode="INOUT" optional="false"/>
+        <attribute name="productName" type="String" mode="IN" optional="true"/>
+        <attribute name="internalName" type="String" mode="IN" optional="true"/>
+        <attribute name="description" type="String" mode="IN" optional="true"/>
+        <attribute name="price" type="BigDecimal" mode="IN" optional="true"/>
+        <attribute name="productFeatureId" type="String" mode="IN" optional="true"/>
+        <attribute name="productFeatureApplTypeId" type="String" mode="IN" optional="true"/>
+        <attribute name="currencyUomId" type="String" mode="IN" optional="true"/>
+    </service>
+
+    <!-- Step 6: assocProductToVirtual Service                      -->
+    <!-- Establishes a PRODUCT_VARIANT association between a        -->
+    <!-- virtual product and a variant product.                     -->
+    <service name="assocProductToVirtual" engine="groovy"
+            location="component://productmanagement/groovyScripts/ProductManagementServices.groovy"
+            invoke="assocProductToVirtual" auth="true">
+        <description>Create a virtual-variant relationship between two products</description>
+        <attribute name="productId" type="String" mode="IN" optional="false">
+            <description>The variant product ID</description>
+        </attribute>
+        <attribute name="virtualProductId" type="String" mode="IN" optional="false">
+            <description>The virtual product ID</description>
+        </attribute>
+    </service>
+
+    <!-- Step 6: updateProductVariant Service                       -->
+    <!-- Updates an existing virtual-variant relationship.          -->
+    <!-- Verifies the relationship exists before modifying.         -->
+    <service name="updateProductVariant" engine="groovy"
+            location="component://productmanagement/groovyScripts/ProductManagementServices.groovy"
+            invoke="updateProductVariant" auth="true">
+        <description>Update an existing virtual-variant product association</description>
+        <attribute name="productId" type="String" mode="IN" optional="false">
+            <description>The variant product ID</description>
+        </attribute>
+        <attribute name="virtualProductId" type="String" mode="IN" optional="false">
+            <description>The virtual product ID</description>
+        </attribute>
+        <attribute name="newVirtualProductId" type="String" mode="IN" optional="true">
+            <description>New virtual product ID to re-associate the variant to</description>
+        </attribute>
+    </service>
+
+</services>
