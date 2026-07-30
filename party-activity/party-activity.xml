@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-engine-xml>
+
+    <!-- ACTIVITY 1 – Party Manager (Mark Tailor)                             -->
+ 
+    <!-- 1. Create Person (Mark Tailor) & Assign Customer Role -->
+    <Party partyId="MARK_TAILOR" partyTypeId="PERSON" statusId="PARTY_ENABLED"/>
+    <!-- Updated Name: Change from Mark Tailor to Mark K Tailor -->
+    <Person partyId="MARK_TAILOR" firstName="Mark" middleName="K" lastName="Tailor"/>
+    <PartyRole partyId="MARK_TAILOR" roleTypeId="CUSTOMER"/>
+
+    <!-- 2. Initial Contact Information -->
+    <ContactMech contactMechId="MT_EMAIL_OLD" contactMechTypeId="EMAIL_ADDRESS" infoString="mark.tailor.old@example.com"/>
+    <PartyContactMech partyId="MARK_TAILOR" contactMechId="MT_EMAIL_OLD" fromDate="2026-01-01 00:00:00.000" thruDate="2026-06-01 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="MARK_TAILOR" contactMechId="MT_EMAIL_OLD" contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2026-01-01 00:00:00.000" thruDate="2026-06-01 00:00:00.000"/>
+
+    <!-- Billing Phone -->
+    <ContactMech contactMechId="MT_TEL_BILL" contactMechTypeId="TELECOM_NUMBER"/>
+    <TelecomNumber contactMechId="MT_TEL_BILL" areaCode="212" contactNumber="555-0101"/>
+    <PartyContactMech partyId="MARK_TAILOR" contactMechId="MT_TEL_BILL" fromDate="2026-01-01 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="MARK_TAILOR" contactMechId="MT_TEL_BILL" contactMechPurposeTypeId="PHONE_BILLING" fromDate="2026-01-01 00:00:00.000"/>
+
+    <!-- Shipping Phone -->
+    <ContactMech contactMechId="MT_TEL_SHIP" contactMechTypeId="TELECOM_NUMBER"/>
+    <TelecomNumber contactMechId="MT_TEL_SHIP" areaCode="212" contactNumber="555-0102"/>
+    <PartyContactMech partyId="MARK_TAILOR" contactMechId="MT_TEL_SHIP" fromDate="2026-01-01 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="MARK_TAILOR" contactMechId="MT_TEL_SHIP" contactMechPurposeTypeId="PHONE_SHIPPING" fromDate="2026-01-01 00:00:00.000"/>
+
+    <!-- Synchronized Initial Address (Shipping + Billing, modified to General Correspondence, expired later) -->
+    <ContactMech contactMechId="MT_ADDR_OLD" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PostalAddress contactMechId="MT_ADDR_OLD" toName="Mark K Tailor" address1="100 Main St" city="New York" stateProvinceGeoId="NY" postalCode="10001" countryGeoId="USA"/>
+    <PartyContactMech partyId="MARK_TAILOR" contactMechId="MT_ADDR_OLD" fromDate="2026-01-01 00:00:00.000" thruDate="2026-06-01 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="MARK_TAILOR" contactMechId="MT_ADDR_OLD" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2026-01-01 00:00:00.000" thruDate="2026-06-01 00:00:00.000"/>
+    
+    <!-- Changed billing purpose to General Correspondence address -->
+    <PartyContactMechPurpose partyId="MARK_TAILOR" contactMechId="MT_ADDR_OLD" contactMechPurposeTypeId="GENERAL_LOCATION" fromDate="2026-01-01 00:00:00.000" thruDate="2026-06-01 00:00:00.000"/>
+
+    <!-- 3. Final Updates (New Email, New Billing Address, New Shipping Address) -->
+    <ContactMech contactMechId="MT_EMAIL_NEW" contactMechTypeId="EMAIL_ADDRESS" infoString="mark.ktailor@example.com"/>
+    <PartyContactMech partyId="MARK_TAILOR" contactMechId="MT_EMAIL_NEW" fromDate="2026-06-01 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="MARK_TAILOR" contactMechId="MT_EMAIL_NEW" contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2026-06-01 00:00:00.000"/>
+
+    <!-- New Billing Address -->
+    <ContactMech contactMechId="MT_ADDR_BILL_NEW" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PostalAddress contactMechId="MT_ADDR_BILL_NEW" toName="Mark K Tailor" address1="200 Corporate Ave Suite 4" city="New York" stateProvinceGeoId="NY" postalCode="10002" countryGeoId="USA"/>
+    <PartyContactMech partyId="MARK_TAILOR" contactMechId="MT_ADDR_BILL_NEW" fromDate="2026-06-01 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="MARK_TAILOR" contactMechId="MT_ADDR_BILL_NEW" contactMechPurposeTypeId="BILLING_LOCATION" fromDate="2026-06-01 00:00:00.000"/>
+
+    <!-- New Shipping Address -->
+    <ContactMech contactMechId="MT_ADDR_SHIP_NEW" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PostalAddress contactMechId="MT_ADDR_SHIP_NEW" toName="Mark K Tailor" address1="300 Logistics Way Bay 2" city="New York" stateProvinceGeoId="NY" postalCode="10003" countryGeoId="USA"/>
+    <PartyContactMech partyId="MARK_TAILOR" contactMechId="MT_ADDR_SHIP_NEW" fromDate="2026-06-01 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="MARK_TAILOR" contactMechId="MT_ADDR_SHIP_NEW" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2026-06-01 00:00:00.000"/>
+
+
+    <!-- ACTIVITY 2 – Webtools (John Liston)                                  -->
+
+    <!-- 1. Create Person (John Liston) & Assign Customer Role -->
+    <Party partyId="JOHN_LISTON" partyTypeId="PERSON" statusId="PARTY_ENABLED"/>
+    <!-- Updated Name: Change from John Liston to John D Liston -->
+    <Person partyId="JOHN_LISTON" firstName="John" middleName="D" lastName="Liston"/>
+    <PartyRole partyId="JOHN_LISTON" roleTypeId="CUSTOMER"/>
+
+    <!-- 2. Initial Contact Information -->
+    <ContactMech contactMechId="JL_EMAIL_OLD" contactMechTypeId="EMAIL_ADDRESS" infoString="john.liston.old@example.com"/>
+    <PartyContactMech partyId="JOHN_LISTON" contactMechId="JL_EMAIL_OLD" fromDate="2026-01-01 00:00:00.000" thruDate="2026-06-01 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="JOHN_LISTON" contactMechId="JL_EMAIL_OLD" contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2026-01-01 00:00:00.000" thruDate="2026-06-01 00:00:00.000"/>
+
+    <!-- Billing Phone -->
+    <ContactMech contactMechId="JL_TEL_BILL" contactMechTypeId="TELECOM_NUMBER"/>
+    <TelecomNumber contactMechId="JL_TEL_BILL" areaCode="312" contactNumber="555-0201"/>
+    <PartyContactMech partyId="JOHN_LISTON" contactMechId="JL_TEL_BILL" fromDate="2026-01-01 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="JOHN_LISTON" contactMechId="JL_TEL_BILL" contactMechPurposeTypeId="PHONE_BILLING" fromDate="2026-01-01 00:00:00.000"/>
+
+    <!-- Shipping Phone -->
+    <ContactMech contactMechId="JL_TEL_SHIP" contactMechTypeId="TELECOM_NUMBER"/>
+    <TelecomNumber contactMechId="JL_TEL_SHIP" areaCode="312" contactNumber="555-0202"/>
+    <PartyContactMech partyId="JOHN_LISTON" contactMechId="JL_TEL_SHIP" fromDate="2026-01-01 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="JOHN_LISTON" contactMechId="JL_TEL_SHIP" contactMechPurposeTypeId="PHONE_SHIPPING" fromDate="2026-01-01 00:00:00.000"/>
+
+    <!-- Synchronized Address (Shipping + Changed Purpose to General Correspondence, Expired) -->
+    <ContactMech contactMechId="JL_ADDR_OLD" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PostalAddress contactMechId="JL_ADDR_OLD" toName="John D Liston" address1="456 Michigan Ave" city="Chicago" stateProvinceGeoId="IL" postalCode="60601" countryGeoId="USA"/>
+    <PartyContactMech partyId="JOHN_LISTON" contactMechId="JL_ADDR_OLD" fromDate="2026-01-01 00:00:00.000" thruDate="2026-06-01 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="JOHN_LISTON" contactMechId="JL_ADDR_OLD" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2026-01-01 00:00:00.000" thruDate="2026-06-01 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="JOHN_LISTON" contactMechId="JL_ADDR_OLD" contactMechPurposeTypeId="GENERAL_LOCATION" fromDate="2026-01-01 00:00:00.000" thruDate="2026-06-01 00:00:00.000"/>
+
+    <!-- 3. Final Updates -->
+    <ContactMech contactMechId="JL_EMAIL_NEW" contactMechTypeId="EMAIL_ADDRESS" infoString="john.dliston@example.com"/>
+    <PartyContactMech partyId="JOHN_LISTON" contactMechId="JL_EMAIL_NEW" fromDate="2026-06-01 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="JOHN_LISTON" contactMechId="JL_EMAIL_NEW" contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2026-06-01 00:00:00.000"/>
+
+    <!-- New Billing Address -->
+    <ContactMech contactMechId="JL_ADDR_BILL_NEW" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PostalAddress contactMechId="JL_ADDR_BILL_NEW" toName="John D Liston" address1="789 Wacker Dr" city="Chicago" stateProvinceGeoId="IL" postalCode="60606" countryGeoId="USA"/>
+    <PartyContactMech partyId="JOHN_LISTON" contactMechId="JL_ADDR_BILL_NEW" fromDate="2026-06-01 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="JOHN_LISTON" contactMechId="JL_ADDR_BILL_NEW" contactMechPurposeTypeId="BILLING_LOCATION" fromDate="2026-06-01 00:00:00.000"/>
+
+    <!-- New Shipping Address -->
+    <ContactMech contactMechId="JL_ADDR_SHIP_NEW" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PostalAddress contactMechId="JL_ADDR_SHIP_NEW" toName="John D Liston" address1="321 Lake Shore Dr" city="Chicago" stateProvinceGeoId="IL" postalCode="60611" countryGeoId="USA"/>
+    <PartyContactMech partyId="JOHN_LISTON" contactMechId="JL_ADDR_SHIP_NEW" fromDate="2026-06-01 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="JOHN_LISTON" contactMechId="JL_ADDR_SHIP_NEW" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2026-06-01 00:00:00.000"/>
+
+    <!-- ACTIVITY 3 – Combined Approach (John Hays)                           -->
+
+    <!-- 1. Create Person (John Hays) & Assign Customer Role -->
+    <Party partyId="JOHN_HAYS" partyTypeId="PERSON" statusId="PARTY_ENABLED"/>
+    <!-- Updated Name: Change from John Hays to John B Hays -->
+    <Person partyId="JOHN_HAYS" firstName="John" middleName="B" lastName="Hays"/>
+    <PartyRole partyId="JOHN_HAYS" roleTypeId="CUSTOMER"/>
+
+    <!-- 2. Contact Information & Credit Card -->
+    <ContactMech contactMechId="JH_EMAIL_OLD" contactMechTypeId="EMAIL_ADDRESS" infoString="john.hays.old@example.com"/>
+    <PartyContactMech partyId="JOHN_HAYS" contactMechId="JH_EMAIL_OLD" fromDate="2026-01-01 00:00:00.000" thruDate="2026-06-01 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="JOHN_HAYS" contactMechId="JH_EMAIL_OLD" contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2026-01-01 00:00:00.000" thruDate="2026-06-01 00:00:00.000"/>
+
+    <!-- Billing Phone -->
+    <ContactMech contactMechId="JH_TEL_BILL" contactMechTypeId="TELECOM_NUMBER"/>
+    <TelecomNumber contactMechId="JH_TEL_BILL" areaCode="415" contactNumber="555-0301"/>
+    <PartyContactMech partyId="JOHN_HAYS" contactMechId="JH_TEL_BILL" fromDate="2026-01-01 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="JOHN_HAYS" contactMechId="JH_TEL_BILL" contactMechPurposeTypeId="PHONE_BILLING" fromDate="2026-01-01 00:00:00.000"/>
+
+    <!-- Two Shipping Phone Numbers -->
+    <ContactMech contactMechId="JH_TEL_SHIP1" contactMechTypeId="TELECOM_NUMBER"/>
+    <TelecomNumber contactMechId="JH_TEL_SHIP1" areaCode="415" contactNumber="555-0302"/>
+    <PartyContactMech partyId="JOHN_HAYS" contactMechId="JH_TEL_SHIP1" fromDate="2026-01-01 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="JOHN_HAYS" contactMechId="JH_TEL_SHIP1" contactMechPurposeTypeId="PHONE_SHIPPING" fromDate="2026-01-01 00:00:00.000"/>
+
+    <ContactMech contactMechId="JH_TEL_SHIP2" contactMechTypeId="TELECOM_NUMBER"/>
+    <TelecomNumber contactMechId="JH_TEL_SHIP2" areaCode="415" contactNumber="555-0303"/>
+    <PartyContactMech partyId="JOHN_HAYS" contactMechId="JH_TEL_SHIP2" fromDate="2026-01-01 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="JOHN_HAYS" contactMechId="JH_TEL_SHIP2" contactMechPurposeTypeId="PHONE_SHIPPING" fromDate="2026-01-01 00:00:00.000"/>
+
+    <!-- Synchronized Address (Expired) -->
+    <ContactMech contactMechId="JH_ADDR_OLD" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PostalAddress contactMechId="JH_ADDR_OLD" toName="John B Hays" address1="50 Market St" city="San Francisco" stateProvinceGeoId="CA" postalCode="94105" countryGeoId="USA"/>
+    <PartyContactMech partyId="JOHN_HAYS" contactMechId="JH_ADDR_OLD" fromDate="2026-01-01 00:00:00.000" thruDate="2026-06-01 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="JOHN_HAYS" contactMechId="JH_ADDR_OLD" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2026-01-01 00:00:00.000" thruDate="2026-06-01 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="JOHN_HAYS" contactMechId="JH_ADDR_OLD" contactMechPurposeTypeId="GENERAL_LOCATION" fromDate="2026-01-01 00:00:00.000" thruDate="2026-06-01 00:00:00.000"/>
+
+    <!-- Credit Card Record -->
+    <PaymentMethod paymentMethodId="JH_CC_01" paymentMethodTypeId="CREDIT_CARD" partyId="JOHN_HAYS" fromDate="2026-01-01 00:00:00.000"/>
+    <CreditCard paymentMethodId="JH_CC_01" cardType="CCT_VISA" cardNumber="4111111111111111" expireDate="12/2028" firstNameOnCard="John" lastNameOnCard="Hays"/>
+
+    <!-- 3. User Login & Security Group (Party Manager Access) -->
+    <UserLogin userLoginId="jhays" partyId="JOHN_HAYS" currentPassword="{SHA}43aa2657d4728549645b8e6f36301210b64d1263" enabled="Y"/>
+    <UserLoginSecurityGroup userLoginId="jhays" groupId="PARTYADMIN" fromDate="2026-01-01 00:00:00.000"/>
+
+    <!-- 4. Final Contact Updates -->
+    <!-- New Email -->
+    <ContactMech contactMechId="JH_EMAIL_NEW" contactMechTypeId="EMAIL_ADDRESS" infoString="john.bhays@example.com"/>
+    <PartyContactMech partyId="JOHN_HAYS" contactMechId="JH_EMAIL_NEW" fromDate="2026-06-01 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="JOHN_HAYS" contactMechId="JH_EMAIL_NEW" contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2026-06-01 00:00:00.000"/>
+
+    <!-- New Billing Address -->
+    <ContactMech contactMechId="JH_ADDR_BILL_NEW" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PostalAddress contactMechId="JH_ADDR_BILL_NEW" toName="John B Hays" address1="100 Howard St" city="San Francisco" stateProvinceGeoId="CA" postalCode="94105" countryGeoId="USA"/>
+    <PartyContactMech partyId="JOHN_HAYS" contactMechId="JH_ADDR_BILL_NEW" fromDate="2026-06-01 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="JOHN_HAYS" contactMechId="JH_ADDR_BILL_NEW" contactMechPurposeTypeId="BILLING_LOCATION" fromDate="2026-06-01 00:00:00.000"/>
+
+    <!-- New Shipping Address -->
+    <ContactMech contactMechId="JH_ADDR_SHIP_NEW" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PostalAddress contactMechId="JH_ADDR_SHIP_NEW" toName="John B Hays" address1="200 Mission St" city="San Francisco" stateProvinceGeoId="CA" postalCode="94105" countryGeoId="USA"/>
+    <PartyContactMech partyId="JOHN_HAYS" contactMechId="JH_ADDR_SHIP_NEW" fromDate="2026-06-01 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="JOHN_HAYS" contactMechId="JH_ADDR_SHIP_NEW" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2026-06-01 00:00:00.000"/>
+
+
+    <!-- ACTIVITY 4 – Combined Approach (David Zeneski)                       -->
+
+    <!-- 1. Create Person (David Zeneski) & Assign Customer Role -->
+    <Party partyId="DAVID_ZENESKI" partyTypeId="PERSON" statusId="PARTY_ENABLED"/>
+    <!-- Updated Name: Change from David Zeneski to David R Zeneski -->
+    <Person partyId="DAVID_ZENESKI" firstName="David" middleName="R" lastName="Zeneski"/>
+    <PartyRole partyId="DAVID_ZENESKI" roleTypeId="CUSTOMER"/>
+
+    <!-- 2. Initial Contact Information & Credit Card -->
+    <!-- Initial Email (Expired) -->
+    <ContactMech contactMechId="DZ_EMAIL_OLD" contactMechTypeId="EMAIL_ADDRESS" infoString="david.zeneski.old@example.com"/>
+    <PartyContactMech partyId="DAVID_ZENESKI" contactMechId="DZ_EMAIL_OLD" fromDate="2026-01-01 00:00:00.000" thruDate="2026-06-01 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="DAVID_ZENESKI" contactMechId="DZ_EMAIL_OLD" contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2026-01-01 00:00:00.000" thruDate="2026-06-01 00:00:00.000"/>
+
+    <!-- Billing Phone -->
+    <ContactMech contactMechId="DZ_TEL_BILL" contactMechTypeId="TELECOM_NUMBER"/>
+    <TelecomNumber contactMechId="DZ_TEL_BILL" areaCode="206" contactNumber="555-0401"/>
+    <PartyContactMech partyId="DAVID_ZENESKI" contactMechId="DZ_TEL_BILL" fromDate="2026-01-01 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="DAVID_ZENESKI" contactMechId="DZ_TEL_BILL" contactMechPurposeTypeId="PHONE_BILLING" fromDate="2026-01-01 00:00:00.000"/>
+
+    <!-- Shipping Phone -->
+    <ContactMech contactMechId="DZ_TEL_SHIP" contactMechTypeId="TELECOM_NUMBER"/>
+    <TelecomNumber contactMechId="DZ_TEL_SHIP" areaCode="206" contactNumber="555-0402"/>
+    <PartyContactMech partyId="DAVID_ZENESKI" contactMechId="DZ_TEL_SHIP" fromDate="2026-01-01 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="DAVID_ZENESKI" contactMechId="DZ_TEL_SHIP" contactMechPurposeTypeId="PHONE_SHIPPING" fromDate="2026-01-01 00:00:00.000"/>
+
+    <!-- Synchronized Address (Expired) -->
+    <ContactMech contactMechId="DZ_ADDR_OLD" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PostalAddress contactMechId="DZ_ADDR_OLD" toName="David R Zeneski" address1="700 Pine St" city="Seattle" stateProvinceGeoId="WA" postalCode="98101" countryGeoId="USA"/>
+    <PartyContactMech partyId="DAVID_ZENESKI" contactMechId="DZ_ADDR_OLD" fromDate="2026-01-01 00:00:00.000" thruDate="2026-06-01 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="DAVID_ZENESKI" contactMechId="DZ_ADDR_OLD" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2026-01-01 00:00:00.000" thruDate="2026-06-01 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="DAVID_ZENESKI" contactMechId="DZ_ADDR_OLD" contactMechPurposeTypeId="GENERAL_LOCATION" fromDate="2026-01-01 00:00:00.000" thruDate="2026-06-01 00:00:00.000"/>
+
+    <!-- Credit Card Record -->
+    <PaymentMethod paymentMethodId="DZ_CC_01" paymentMethodTypeId="CREDIT_CARD" partyId="DAVID_ZENESKI" fromDate="2026-01-01 00:00:00.000"/>
+    <CreditCard paymentMethodId="DZ_CC_01" cardType="CCT_MASTERCARD" cardNumber="5111111111111111" expireDate="11/2029" firstNameOnCard="David" lastNameOnCard="Zeneski"/>
+
+    <!-- 3. Two User Logins with distinct Security Groups -->
+    <!-- User Login 1: Order Manager Access -->
+    <UserLogin userLoginId="dzeneski_order" partyId="DAVID_ZENESKI" currentPassword="{SHA}43aa2657d4728549645b8e6f36301210b64d1263" enabled="Y"/>
+    <UserLoginSecurityGroup userLoginId="dzeneski_order" groupId="ORDERADMIN" fromDate="2026-01-01 00:00:00.000"/>
+
+    <!-- User Login 2: Party Manager Access -->
+    <UserLogin userLoginId="dzeneski_party" partyId="DAVID_ZENESKI" currentPassword="{SHA}43aa2657d4728549645b8e6f36301210b64d1263" enabled="Y"/>
+    <UserLoginSecurityGroup userLoginId="dzeneski_party" groupId="PARTYADMIN" fromDate="2026-01-01 00:00:00.000"/>
+
+    <!-- 4. Final Contact Updates -->
+    <ContactMech contactMechId="DZ_EMAIL_NEW" contactMechTypeId="EMAIL_ADDRESS" infoString="david.rzeneski@example.com"/>
+    <PartyContactMech partyId="DAVID_ZENESKI" contactMechId="DZ_EMAIL_NEW" fromDate="2026-06-01 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="DAVID_ZENESKI" contactMechId="DZ_EMAIL_NEW" contactMechPurposeTypeId="PRIMARY_EMAIL" fromDate="2026-06-01 00:00:00.000"/>
+
+    <!-- New Billing Address -->
+    <ContactMech contactMechId="DZ_ADDR_BILL_NEW" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PostalAddress contactMechId="DZ_ADDR_BILL_NEW" toName="David R Zeneski" address1="1200 4th Ave" city="Seattle" stateProvinceGeoId="WA" postalCode="98101" countryGeoId="USA"/>
+    <PartyContactMech partyId="DAVID_ZENESKI" contactMechId="DZ_ADDR_BILL_NEW" fromDate="2026-06-01 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="DAVID_ZENESKI" contactMechId="DZ_ADDR_BILL_NEW" contactMechPurposeTypeId="BILLING_LOCATION" fromDate="2026-06-01 00:00:00.000"/>
+
+    <!-- New Shipping Address -->
+    <ContactMech contactMechId="DZ_ADDR_SHIP_NEW" contactMechTypeId="POSTAL_ADDRESS"/>
+    <PostalAddress contactMechId="DZ_ADDR_SHIP_NEW" toName="David R Zeneski" address1="1901 1st Ave" city="Seattle" stateProvinceGeoId="WA" postalCode="98101" countryGeoId="USA"/>
+    <PartyContactMech partyId="DAVID_ZENESKI" contactMechId="DZ_ADDR_SHIP_NEW" fromDate="2026-06-01 00:00:00.000"/>
+    <PartyContactMechPurpose partyId="DAVID_ZENESKI" contactMechId="DZ_ADDR_SHIP_NEW" contactMechPurposeTypeId="SHIPPING_LOCATION" fromDate="2026-06-01 00:00:00.000"/>
+
+</entity-engine-xml>
+
