@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<service-eca xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://ofbiz.apache.org/dtds/service-eca.xsd">
+    <eca service="createOfbizDemo" event="invoke">
+        <condition field-name="comments" operator="is-not-empty"/>
+        <action service="logOfbizDemoComments" mode="sync"/>
+    </eca>
+</service-eca>
